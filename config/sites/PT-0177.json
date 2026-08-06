@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0177",
+  "rule_version": 1,
+  "target": {
+    "url": "https://dwfoxsuz.ik1v5-stbjb-dsttyy.xyz:16677/topic/456550.html",
+    "position": "top",
+    "name": "彩云飘飘",
+    "keyword": "平特1肖"
+  },
+  "parser": {
+    "url_contains": "https://dwfoxsuz.ik1v5-stbjb-dsttyy.xyz:16677/topic/456550.html",
+    "name": "彩云飘飘",
+    "position": "top",
+    "keyword": "平特1肖",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

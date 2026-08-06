@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0199",
+  "rule_version": 1,
+  "target": {
+    "url": "https://wwtkvupm.1jpxm-0dmxs-hzimql.xyz:16677/",
+    "position": "tail",
+    "name": "平特一肖规律二肖",
+    "keyword": "规律二肖"
+  },
+  "parser": {
+    "url_contains": "https://wwtkvupm.1jpxm-0dmxs-hzimql.xyz:16677/",
+    "name": "平特一肖规律二肖",
+    "position": "tail",
+    "keyword": "规律二肖",
+    "mode": "anchored_formula_section",
+    "section_anchor": "『规律二肖』",
+    "section_end": "『百马禁一肖』",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "terminal_formula_result",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

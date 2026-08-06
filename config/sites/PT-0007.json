@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0007",
+  "rule_version": 1,
+  "target": {
+    "url": "https://sadoleu.rznla-fgwyr-nzqalp.xyz:16677/topic/654109.html",
+    "position": "tail",
+    "name": "碎风漫卷",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://sadoleu.rznla-fgwyr-nzqalp.xyz:16677/topic/654109.html",
+    "name": "碎风漫卷",
+    "position": "tail",
+    "keyword": "平特一肖",
+    "mode": "author_section",
+    "section_anchor": "碎风漫卷 发表于",
+    "section_end": "鸿蒙娱乐城",
+    "section_end_exact": true,
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

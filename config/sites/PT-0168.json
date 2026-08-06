@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0168",
+  "rule_version": 1,
+  "target": {
+    "url": "https://fjjxlve.eclrc-7oqku-atxhrs.xyz:16677/topic/488685.html",
+    "position": "tail",
+    "name": "地冻天寒",
+    "keyword": "一肖平特"
+  },
+  "parser": {
+    "url_contains": "https://fjjxlve.eclrc-7oqku-atxhrs.xyz:16677/topic/488685.html",
+    "name": "地冻天寒",
+    "position": "tail",
+    "keyword": "一肖平特",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

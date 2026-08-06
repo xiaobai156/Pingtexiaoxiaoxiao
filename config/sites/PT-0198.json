@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0198",
+  "rule_version": 1,
+  "target": {
+    "url": "https://wwtkvupm.1jpxm-0dmxs-hzimql.xyz:16677/",
+    "position": "top",
+    "name": "平特一肖成语平特",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://wwtkvupm.1jpxm-0dmxs-hzimql.xyz:16677/",
+    "name": "平特一肖成语平特",
+    "position": "top",
+    "keyword": "成语平特",
+    "mode": "anchored_section",
+    "section_anchor": "『成语平特』",
+    "section_end": "『原创七尾』",
+    "line_keyword": "成語爆平特",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

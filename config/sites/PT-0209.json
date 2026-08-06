@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0209",
+  "rule_version": 1,
+  "target": {
+    "url": "https://wwtkvupm.1jpxm-0dmxs-hzimql.xyz:16677/topic/305386.html",
+    "position": "top",
+    "name": "皮咔加油",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://wwtkvupm.1jpxm-0dmxs-hzimql.xyz:16677/topic/305386.html",
+    "name": "皮咔加油",
+    "position": "top",
+    "keyword": "平特一肖",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0016",
+  "rule_version": 1,
+  "target": {
+    "url": "https://aa.828797a.com:1888/art_art/8126.html",
+    "position": "top",
+    "name": "山涧晴岚",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://aa.828797a.com:1888/art_art/8126.html",
+    "name": "山涧晴岚",
+    "position": "top",
+    "keyword": "平特一肖",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0044",
+  "rule_version": 1,
+  "target": {
+    "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702069.html",
+    "position": "tail",
+    "name": "眉眼一袭",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702069.html",
+    "name": "眉眼一袭",
+    "position": "tail",
+    "keyword": "成语平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

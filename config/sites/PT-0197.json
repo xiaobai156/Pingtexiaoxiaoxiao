@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0197",
+  "rule_version": 1,
+  "target": {
+    "url": "https://rmrcjqk.6ln2t-46k8t-kuthoe.xyz:16677/topic/267365.html",
+    "position": "top",
+    "name": "梦幻之雪",
+    "keyword": "平特壹肖"
+  },
+  "parser": {
+    "url_contains": "https://rmrcjqk.6ln2t-46k8t-kuthoe.xyz:16677/topic/267365.html",
+    "name": "梦幻之雪",
+    "position": "top",
+    "keyword": "平特壹肖",
+    "mode": "anchored_section",
+    "section_anchor": "梦幻之雪《平特壹肖》奇迹发生",
+    "section_end": "海枯石烂《发财四肖》免费公开",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

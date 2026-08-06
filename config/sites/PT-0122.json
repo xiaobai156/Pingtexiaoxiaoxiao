@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0122",
+  "rule_version": 1,
+  "target": {
+    "url": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/457572.html",
+    "position": "tail",
+    "name": "攞袖揎拳",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/457572.html",
+    "name": "攞袖揎拳",
+    "position": "tail",
+    "keyword": "平特一肖",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

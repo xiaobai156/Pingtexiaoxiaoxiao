@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "description": "已封存的平特站点，不参与正式抓取、重复检测或缓存基准。",
+  "sites": [
+    {
+      "url": "https://znnpwd.p42g1-zqmsb-jjrsfg.xyz:16677/topic/572223.html",
+      "position": "top",
+      "name": "锦绣前程",
+      "keyword": "平特一肖",
+      "archive_reason": "指定期数匹配到超过2个生肖，按规则丢失败",
+      "evidence": {
+        "issue": "207",
+        "zodiacs": "猴猪蛇龙羊",
+        "matched_line": "207期【平特五肖】【猴猪蛇龙羊】开00准"
+      },
+      "original_target": {
+        "url": "https://znnpwd.p42g1-zqmsb-jjrsfg.xyz:16677/topic/572223.html",
+        "position": "top",
+        "name": "锦绣前程",
+        "keyword": "平特一肖"
+      },
+      "original_special_parse_rule": {
+        "url_contains": "https://znnpwd.p42g1-zqmsb-jjrsfg.xyz:16677/topic/572223.html",
+        "name": "锦绣前程",
+        "position": "top",
+        "keyword": "平特一肖",
+        "mode": "anchored_section",
+        "section_anchor": "锦绣前程【平特五肖】已公开",
+        "section_end": "站长宣言:",
+        "line_keyword": "平特五肖",
+        "allow_many_zodiac_candidate": true,
+        "issue_format": "arabic_issue_exact",
+        "data_structure": "confirmed_result_line",
+        "section_boundary": "explicit_anchors",
+        "source_strategy": "browser_main",
+        "frame_scope": "main",
+        "browser_selector": "body"
+      },
+      "last_cached_values": {
+        "200": "蛇",
+        "199": "鼠",
+        "198": "鸡"
+      },
+      "archived_at": "2026-07-26"
+    }
+  ]
+}

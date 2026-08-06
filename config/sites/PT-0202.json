@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0202",
+  "rule_version": 1,
+  "target": {
+    "url": "https://dahnqumi.i504e-bi3xk-bqxlqv.xyz:16677/topic/665091.html",
+    "position": "tail",
+    "name": "闻所未闻",
+    "keyword": "平特二肖"
+  },
+  "parser": {
+    "url_contains": "https://dahnqumi.i504e-bi3xk-bqxlqv.xyz:16677/topic/665091.html",
+    "name": "闻所未闻",
+    "position": "tail",
+    "keyword": "平特二肖",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

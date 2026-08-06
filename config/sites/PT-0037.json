@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0037",
+  "rule_version": 1,
+  "target": {
+    "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702068.html",
+    "position": "tail",
+    "name": "赢两千万",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702068.html",
+    "name": "赢两千万",
+    "position": "tail",
+    "keyword": "成语平特",
+    "mode": "anchored_section",
+    "section_anchor": "作者:永永无穷",
+    "section_end": "★★ 博彩必备★★",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

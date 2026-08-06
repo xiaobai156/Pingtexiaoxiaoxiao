@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0082",
+  "rule_version": 1,
+  "target": {
+    "url": "https://6f4poq.aj8o0-wc3m6-pvmrxd.work/topic/430688.html",
+    "position": "top",
+    "name": "长途跋涉",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://6f4poq.aj8o0-wc3m6-pvmrxd.work/topic/430688.html",
+    "name": "长途跋涉",
+    "position": "top",
+    "keyword": "平特一肖",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

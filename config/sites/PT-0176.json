@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0176",
+  "rule_version": 1,
+  "target": {
+    "url": "https://dwfoxsuz.ik1v5-stbjb-dsttyy.xyz:16677/topic/461343.html",
+    "position": "top",
+    "name": "天地之间",
+    "keyword": "一肖平特"
+  },
+  "parser": {
+    "url_contains": "https://dwfoxsuz.ik1v5-stbjb-dsttyy.xyz:16677/topic/461343.html",
+    "name": "天地之间",
+    "position": "top",
+    "keyword": "一肖平特",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

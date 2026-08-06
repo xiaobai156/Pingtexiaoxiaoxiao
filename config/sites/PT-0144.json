@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0144",
+  "rule_version": 1,
+  "target": {
+    "url": "https://yqjfwqsc.1dayz-aetgp-kbjidr.xyz:16677/topic/682000.html",
+    "position": "tail",
+    "name": "无字之思",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://yqjfwqsc.1dayz-aetgp-kbjidr.xyz:16677/topic/682000.html",
+    "name": "无字之思",
+    "position": "tail",
+    "keyword": "平特一肖",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0069",
+  "rule_version": 1,
+  "target": {
+    "url": "https://t3zvj.qxc2u-eeb51-rakikf.xyz/topic/518888.html",
+    "position": "tail",
+    "name": "五彩缤纷",
+    "keyword": "一肖平特"
+  },
+  "parser": {
+    "url_contains": "https://t3zvj.qxc2u-eeb51-rakikf.xyz/topic/518888.html",
+    "name": "五彩缤纷",
+    "position": "tail",
+    "keyword": "一肖平特",
+    "mode": "anchored_section",
+    "section_anchor": "作者:五彩缤纷",
+    "section_end": "{issue}期",
+    "section_anchor_exact": true,
+    "section_end_exact": true,
+    "line_keyword": "一肖平特",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

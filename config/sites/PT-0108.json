@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0108",
+  "rule_version": 1,
+  "target": {
+    "url": "https://zdwcig.iyo4d-81klf-udwkqg.work:16677/topic/654093.html",
+    "position": "tail",
+    "name": "爱奇朵拉",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://zdwcig.iyo4d-81klf-udwkqg.work:16677/topic/654093.html",
+    "name": "爱奇朵拉",
+    "position": "tail",
+    "keyword": "平特一肖",
+    "mode": "author_section",
+    "section_anchor": "爱奇朵拉 发表于",
+    "section_end": "上一篇：",
+    "section_end_exact": true,
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

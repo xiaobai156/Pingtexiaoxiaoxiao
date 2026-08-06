@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0115",
+  "rule_version": 1,
+  "target": {
+    "url": "https://rmrcjqk.6ln2t-46k8t-kuthoe.xyz:16677/topic/267381.html",
+    "position": "top",
+    "name": "无敌金刚",
+    "keyword": "两字平特"
+  },
+  "parser": {
+    "url_contains": "https://rmrcjqk.6ln2t-46k8t-kuthoe.xyz:16677/topic/267381.html",
+    "name": "无敌金刚",
+    "position": "top",
+    "keyword": "两字平特",
+    "mode": "anchored_section",
+    "section_anchor": "无敌金刚《两字平特》奔向富豪",
+    "section_end": "特码专区",
+    "line_keyword": "《两字平特》",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

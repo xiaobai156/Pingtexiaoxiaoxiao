@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0184",
+  "rule_version": 1,
+  "target": {
+    "url": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741272.html",
+    "position": "top",
+    "name": "龙骧虎步",
+    "keyword": "四字平特"
+  },
+  "parser": {
+    "url_contains": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741272.html",
+    "name": "龙骧虎步",
+    "position": "top",
+    "keyword": "四字平特",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

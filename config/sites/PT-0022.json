@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0022",
+  "rule_version": 1,
+  "target": {
+    "url": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/",
+    "position": "top",
+    "name": "智能成语",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/",
+    "name": "智能成语",
+    "position": "top",
+    "keyword": "成语平特",
+    "mode": "anchored_section",
+    "section_anchor": "成语平特",
+    "section_end": "谜语平特",
+    "section_anchor_exact": true,
+    "section_end_exact": true,
+    "line_keyword": "成语平特",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

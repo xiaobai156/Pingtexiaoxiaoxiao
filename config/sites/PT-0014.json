@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0014",
+  "rule_version": 1,
+  "target": {
+    "url": "https://aa.828797a.com:1888/",
+    "position": "top",
+    "name": "水果奶奶",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://aa.828797a.com:1888/",
+    "name": "水果奶奶",
+    "position": "top",
+    "keyword": "平特一肖",
+    "mode": "anchored_section",
+    "section_anchor": "水果奶奶【平特一肖】",
+    "section_end": "水果奶奶【绝杀一合】",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

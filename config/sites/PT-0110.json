@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0110",
+  "rule_version": 1,
+  "target": {
+    "url": "https://zdwcig.iyo4d-81klf-udwkqg.work:16677/topic/502908.html",
+    "position": "top",
+    "name": "恋人未满",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://zdwcig.iyo4d-81klf-udwkqg.work:16677/topic/502908.html",
+    "name": "恋人未满",
+    "position": "top",
+    "keyword": "平特一肖",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

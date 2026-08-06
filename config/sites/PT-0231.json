@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0231",
+  "rule_version": 1,
+  "target": {
+    "url": "https://w4shq9.47598676.app/topic/228617.html",
+    "position": "top",
+    "name": "上官盐翼",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://w4shq9.47598676.app/topic/228617.html",
+    "name": "上官盐翼",
+    "position": "top",
+    "keyword": "成语平特",
+    "mode": "author_section",
+    "section_anchor": "作者:上官盐翼",
+    "section_anchor_exact": true,
+    "section_end": "鸿蒙娱乐城",
+    "section_end_exact": true,
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

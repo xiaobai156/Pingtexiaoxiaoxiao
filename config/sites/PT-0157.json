@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0157",
+  "rule_version": 1,
+  "target": {
+    "url": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/727464.html",
+    "position": "top",
+    "name": "一丘之貉",
+    "keyword": "三字平特"
+  },
+  "parser": {
+    "url_contains": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/727464.html",
+    "name": "一丘之貉",
+    "position": "top",
+    "keyword": "三字平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

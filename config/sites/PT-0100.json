@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0100",
+  "rule_version": 1,
+  "target": {
+    "url": "https://exfwsrjh.s47mc-rou2r-ontpfb.xyz:16677/topic/472573.html",
+    "position": "top",
+    "name": "湘潭高手",
+    "keyword": "湘潭高手平特二肖"
+  },
+  "parser": {
+    "url_contains": "https://exfwsrjh.s47mc-rou2r-ontpfb.xyz:16677/topic/472573.html",
+    "name": "湘潭高手",
+    "position": "top",
+    "keyword": "湘潭高手平特二肖",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0174",
+  "rule_version": 1,
+  "target": {
+    "url": "https://znnpwd.p42g1-zqmsb-jjrsfg.xyz:16677/topic/253419.html",
+    "position": "tail",
+    "name": "满堂红第四",
+    "keyword": "公式平特"
+  },
+  "parser": {
+    "url_contains": "https://znnpwd.p42g1-zqmsb-jjrsfg.xyz:16677/topic/253419.html",
+    "name": "满堂红第四",
+    "position": "tail",
+    "keyword": "公式平特",
+    "mode": "anchored_formula_section",
+    "section_anchor": "【公式平特】",
+    "section_end": "站长宣言",
+    "allow_question_summary": true,
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "terminal_formula_result",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

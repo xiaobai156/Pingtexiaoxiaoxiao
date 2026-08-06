@@ -1,0 +1,23 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0196",
+  "rule_version": 1,
+  "target": {
+    "url": "https://mxiscni.nkh6s-vfni4-lwgfvw.xyz:16677/topic/257907.html",
+    "position": "top",
+    "name": "逆天飞翔",
+    "keyword": "三字平特"
+  },
+  "parser": {
+    "url_contains": "https://mxiscni.nkh6s-vfni4-lwgfvw.xyz:16677/topic/257907.html",
+    "name": "逆天飞翔",
+    "position": "top",
+    "keyword": "三字平特",
+    "mode": "linked_topic",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "linked_topic_result",
+    "section_boundary": "linked_record",
+    "source_strategy": "linked_record"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0200",
+  "rule_version": 1,
+  "target": {
+    "url": "https://wwtkvupm.1jpxm-0dmxs-hzimql.xyz:16677/",
+    "position": "top",
+    "name": "平特一肖谜语平特",
+    "keyword": "谜语平特"
+  },
+  "parser": {
+    "url_contains": "https://wwtkvupm.1jpxm-0dmxs-hzimql.xyz:16677/",
+    "name": "平特一肖谜语平特",
+    "position": "top",
+    "keyword": "谜语平特",
+    "mode": "anchored_section",
+    "section_anchor": "『谜语平特』",
+    "section_end": "『家野主三肖』",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

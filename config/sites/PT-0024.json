@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0024",
+  "rule_version": 1,
+  "target": {
+    "url": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/topic/654833.html",
+    "position": "top",
+    "name": "AI平特肖",
+    "keyword": "AI推荐平特"
+  },
+  "parser": {
+    "url_contains": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/topic/654833.html",
+    "name": "AI平特肖",
+    "position": "top",
+    "keyword": "AI推荐平特",
+    "mode": "followup_label",
+    "section_anchor": "{issue}期【AI推荐平特】",
+    "section_end": "推荐平码",
+    "followup_label": "平特一肖",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "label_followup_result",
+    "section_boundary": "issue_followup_block",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {
+    "followup_label": {
+      "url_contains": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/topic/654833.html",
+      "label": "平特一肖"
+    }
+  }
+}

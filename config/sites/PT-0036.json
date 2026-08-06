@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0036",
+  "rule_version": 1,
+  "target": {
+    "url": "https://xaechoxl.h021u-gsjlm-ylkkko.xyz:16677/topic/533901.html",
+    "position": "tail",
+    "name": "依稀久忆",
+    "keyword": "稳赢平特"
+  },
+  "parser": {
+    "url_contains": "https://xaechoxl.h021u-gsjlm-ylkkko.xyz:16677/topic/533901.html",
+    "name": "依稀久忆",
+    "position": "tail",
+    "keyword": "稳赢平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0212",
+  "rule_version": 1,
+  "target": {
+    "url": "https://ewnhbquq.8udr7-6win8-yfikpo.xyz:16677/topic/454685.html",
+    "position": "tail",
+    "name": "菲食薄衣",
+    "keyword": "平特二肖"
+  },
+  "parser": {
+    "url_contains": "https://ewnhbquq.8udr7-6win8-yfikpo.xyz:16677/topic/454685.html",
+    "name": "菲食薄衣",
+    "position": "tail",
+    "keyword": "平特二肖",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

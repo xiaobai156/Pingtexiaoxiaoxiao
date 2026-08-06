@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0021",
+  "rule_version": 1,
+  "target": {
+    "url": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/",
+    "position": "top",
+    "name": "智能平特",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/",
+    "name": "智能平特",
+    "position": "top",
+    "keyword": "平特一肖",
+    "mode": "ai_public_label",
+    "section_anchor": "AAAAA级大公开{issue}期",
+    "section_end": "AI智能网:",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "public_label_followup_result",
+    "section_boundary": "public_label_block",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

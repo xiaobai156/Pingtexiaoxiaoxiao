@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0002",
+  "rule_version": 1,
+  "target": {
+    "url": "https://aq14f.2gdkh-2qrjm-hxaxji.xyz/topic/455715.html",
+    "position": "top",
+    "name": "鬼使神差",
+    "keyword": "四字平特"
+  },
+  "parser": {
+    "url_contains": "https://aq14f.2gdkh-2qrjm-hxaxji.xyz/topic/455715.html",
+    "name": "鬼使神差",
+    "position": "top",
+    "keyword": "四字平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

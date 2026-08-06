@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0063",
+  "rule_version": 1,
+  "target": {
+    "url": "https://w4shq9.nudcl-s6qlr-ywqanh.work/topic/238135.html",
+    "position": "tail",
+    "name": "轻虑浅谋",
+    "keyword": "四字平特"
+  },
+  "parser": {
+    "url_contains": "https://w4shq9.nudcl-s6qlr-ywqanh.work/topic/238135.html",
+    "name": "轻虑浅谋",
+    "position": "tail",
+    "keyword": "四字平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body",
+    "section_end_text": "博彩必备"
+  },
+  "auxiliary": {}
+}

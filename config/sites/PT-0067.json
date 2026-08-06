@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0067",
+  "rule_version": 1,
+  "target": {
+    "url": "https://sfch0f.ro8kk-a92yj-nyajjq.work/topic/458042.html",
+    "position": "tail",
+    "name": "坐视不理",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://sfch0f.ro8kk-a92yj-nyajjq.work/topic/458042.html",
+    "name": "坐视不理",
+    "position": "tail",
+    "keyword": "成语平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

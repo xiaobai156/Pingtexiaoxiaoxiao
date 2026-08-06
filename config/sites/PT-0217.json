@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0217",
+  "rule_version": 1,
+  "target": {
+    "url": "https://huqtzej.vvlq2-j4i8n-lisghq.xyz:16677/topic/505982.html",
+    "position": "top",
+    "name": "光辉岁月",
+    "keyword": "平特二肖"
+  },
+  "parser": {
+    "url_contains": "https://huqtzej.vvlq2-j4i8n-lisghq.xyz:16677/topic/505982.html",
+    "name": "光辉岁月",
+    "position": "top",
+    "keyword": "平特二肖",
+    "mode": "anchored_section",
+    "section_anchor": "光辉岁月 发表于",
+    "section_end": "鸿蒙娱乐城",
+    "section_end_exact": true,
+    "line_keyword": "平特二肖",
+    "allow_many_zodiac_candidate": true,
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0218",
+  "rule_version": 1,
+  "target": {
+    "url": "https://gjyzpnkx.1r42a-pilbo-hfynxw.xyz:16677/topic/680637.html",
+    "position": "tail",
+    "name": "水中着盐",
+    "keyword": "平特２肖"
+  },
+  "parser": {
+    "url_contains": "https://gjyzpnkx.1r42a-pilbo-hfynxw.xyz:16677/topic/680637.html",
+    "name": "水中着盐",
+    "position": "tail",
+    "keyword": "平特２肖",
+    "mode": "author_section",
+    "section_anchor": "水中着盐 发表于",
+    "section_end": "上一篇：",
+    "section_end_exact": true,
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

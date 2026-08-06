@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0001",
+  "rule_version": 1,
+  "target": {
+    "url": "https://aq14f.2gdkh-2qrjm-hxaxji.xyz/",
+    "position": "top",
+    "name": "六合彩宝典",
+    "keyword": "四字平特"
+  },
+  "parser": {
+    "url_contains": "https://aq14f.2gdkh-2qrjm-hxaxji.xyz/",
+    "name": "六合彩宝典",
+    "position": "top",
+    "keyword": "四字平特",
+    "mode": "anchored_section",
+    "section_anchor": "六合宝典『四字平特』",
+    "section_end": "六合宝典『解四字符』",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

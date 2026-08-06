@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0028",
+  "rule_version": 1,
+  "target": {
+    "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/559119.html",
+    "position": "tail",
+    "name": "锦离鸢墨",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/559119.html",
+    "name": "锦离鸢墨",
+    "position": "tail",
+    "keyword": "平特一肖",
+    "mode": "anchored_formula_section",
+    "section_anchor": "锦离鸢墨【平特一肖】独家公式",
+    "section_end": "★★ 博彩必备★★",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "terminal_formula_result",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0162",
+  "rule_version": 1,
+  "target": {
+    "url": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741254.html",
+    "position": "tail",
+    "name": "正气凛然",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741254.html",
+    "name": "正气凛然",
+    "position": "tail",
+    "keyword": "平特一肖",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0150",
+  "rule_version": 1,
+  "target": {
+    "url": "https://zcphjs.ce83x-ms2rz-orwude.work:12277/#/users/1491",
+    "position": "top",
+    "name": "免费门",
+    "keyword": "平特①肖"
+  },
+  "parser": {
+    "url_contains": "https://zcphjs.ce83x-ms2rz-orwude.work:12277/#/users/1491",
+    "name": "免费门",
+    "position": "top",
+    "keyword": "平特①肖",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "dynamic_record",
+    "record_topic": "【平特一肖】"
+  },
+  "auxiliary": {}
+}

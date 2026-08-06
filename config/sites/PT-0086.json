@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0086",
+  "rule_version": 1,
+  "target": {
+    "url": "https://jnf52f.bz2l3-5dx5p-ooqydl.work/topic/460401.html",
+    "position": "top",
+    "name": "桃花潭水",
+    "keyword": "①肖平特"
+  },
+  "parser": {
+    "url_contains": "https://jnf52f.bz2l3-5dx5p-ooqydl.work/topic/460401.html",
+    "name": "桃花潭水",
+    "position": "top",
+    "keyword": "①肖平特",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

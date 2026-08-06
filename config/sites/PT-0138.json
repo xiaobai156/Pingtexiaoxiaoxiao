@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0138",
+  "rule_version": 1,
+  "target": {
+    "url": "https://hxehqejq.43sle-ip8kw-azuuun.work:16677/topic/453609.html",
+    "position": "tail",
+    "name": "千军万马",
+    "keyword": "四字平特"
+  },
+  "parser": {
+    "url_contains": "https://hxehqejq.43sle-ip8kw-azuuun.work:16677/topic/453609.html",
+    "name": "千军万马",
+    "position": "tail",
+    "keyword": "四字平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

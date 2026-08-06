@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0034",
+  "rule_version": 1,
+  "target": {
+    "url": "https://xaechoxl.h021u-gsjlm-ylkkko.xyz:16677/",
+    "position": "tail",
+    "name": "唐朝",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://xaechoxl.h021u-gsjlm-ylkkko.xyz:16677/",
+    "name": "唐朝",
+    "position": "tail",
+    "keyword": "平特一肖",
+    "mode": "anchored_section",
+    "section_anchor": "唐朝～平特一肖～",
+    "section_end": "唐朝～七尾中特～",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

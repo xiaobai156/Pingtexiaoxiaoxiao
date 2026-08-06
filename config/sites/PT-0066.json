@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0066",
+  "rule_version": 1,
+  "target": {
+    "url": "https://gboqrz.hmf0d-gnako-vspyqi.work/topic/457974.html",
+    "position": "top",
+    "name": "一叶报秋",
+    "keyword": "平特①肖"
+  },
+  "parser": {
+    "url_contains": "https://gboqrz.hmf0d-gnako-vspyqi.work/topic/457974.html",
+    "name": "一叶报秋",
+    "position": "top",
+    "keyword": "平特①肖",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

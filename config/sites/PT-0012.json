@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0012",
+  "rule_version": 1,
+  "target": {
+    "url": "https://sadoleu.rznla-fgwyr-nzqalp.xyz:16677/topic/385408.html",
+    "position": "tail",
+    "name": "小白平特",
+    "keyword": "小白平特"
+  },
+  "parser": {
+    "url_contains": "https://sadoleu.rznla-fgwyr-nzqalp.xyz:16677/topic/385408.html",
+    "name": "小白平特",
+    "position": "tail",
+    "keyword": "小白平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "image_resource"
+  },
+  "auxiliary": {
+    "image_target": {
+      "url_contains": "https://sadoleu.rznla-fgwyr-nzqalp.xyz:16677/topic/385408.html",
+      "name": "小白平特"
+    }
+  }
+}

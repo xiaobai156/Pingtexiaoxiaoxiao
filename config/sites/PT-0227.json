@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0227",
+  "rule_version": 1,
+  "target": {
+    "url": "https://vfrsml.zno4a-9mnt0-kjuvbu.xyz:16677/topic/279312.html",
+    "position": "top",
+    "name": "影遁之影",
+    "keyword": "平特二肖"
+  },
+  "parser": {
+    "url_contains": "https://vfrsml.zno4a-9mnt0-kjuvbu.xyz:16677/topic/279312.html",
+    "name": "影遁之影",
+    "position": "top",
+    "keyword": "平特二肖",
+    "mode": "author_section",
+    "section_anchor": "影遁之影 发表于",
+    "section_end": "鸿蒙娱乐城",
+    "section_end_exact": true,
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

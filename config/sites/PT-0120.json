@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0120",
+  "rule_version": 1,
+  "target": {
+    "url": "https://flirclg.d9n5a-2i9au-ezvqgb.xyz:16677/topic/479163.html",
+    "position": "top",
+    "name": "口是心非",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://flirclg.d9n5a-2i9au-ezvqgb.xyz:16677/topic/479163.html",
+    "name": "口是心非",
+    "position": "top",
+    "keyword": "平特一肖",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

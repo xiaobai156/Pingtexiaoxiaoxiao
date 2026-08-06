@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0193",
+  "rule_version": 1,
+  "target": {
+    "url": "https://ymqmvj.7md3q-rm157-wcvhte.work:16677/",
+    "position": "top",
+    "name": "彩民书籍",
+    "keyword": "平特一肖:"
+  },
+  "parser": {
+    "url_contains": "https://ymqmvj.7md3q-rm157-wcvhte.work:16677/",
+    "name": "彩民书籍",
+    "position": "top",
+    "keyword": "平特一肖:",
+    "mode": "anchored_section",
+    "section_anchor": "澳门彩民书籍『平特一肖』",
+    "section_end": "澳门彩民书籍『18码中特』",
+    "line_keyword": "平特一肖:",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

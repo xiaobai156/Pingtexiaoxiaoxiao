@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0233",
+  "rule_version": 1,
+  "target": {
+    "url": "https://gboqrz.azq20-uikec-rngxcp.work/topic/459146.html",
+    "position": "top",
+    "name": "一一对应",
+    "keyword": "平特二肖"
+  },
+  "parser": {
+    "url_contains": "https://gboqrz.azq20-uikec-rngxcp.work/topic/459146.html",
+    "name": "一一对应",
+    "position": "top",
+    "keyword": "平特二肖",
+    "mode": "author_section",
+    "section_anchor": "作者:一一对应",
+    "section_anchor_exact": true,
+    "section_end": "鸿蒙娱乐城",
+    "section_end_exact": true,
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

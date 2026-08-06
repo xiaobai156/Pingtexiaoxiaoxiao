@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0013",
+  "rule_version": 1,
+  "target": {
+    "url": "https://tulprhfc.wghcb-bnmgm-hyymaz.work:16655/",
+    "position": "top",
+    "name": "平特一肖",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://tulprhfc.wghcb-bnmgm-hyymaz.work:16655/",
+    "name": "平特一肖",
+    "position": "top",
+    "keyword": "平特一肖",
+    "mode": "anchored_section",
+    "section_anchor": "澳门平特一肖网 『妙解平特一肖』",
+    "section_end": "澳门平特一肖网 『规律一尾』",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

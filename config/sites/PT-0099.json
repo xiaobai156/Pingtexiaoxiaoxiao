@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0099",
+  "rule_version": 1,
+  "target": {
+    "url": "https://t59nd.m9b2b-gc0qk-ekomvo.xyz/topic/231850.html",
+    "position": "top",
+    "name": "井井有条",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://t59nd.m9b2b-gc0qk-ekomvo.xyz/topic/231850.html",
+    "name": "井井有条",
+    "position": "top",
+    "keyword": "成语平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

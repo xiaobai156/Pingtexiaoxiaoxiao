@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0025",
+  "rule_version": 1,
+  "target": {
+    "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/557469.html",
+    "position": "top",
+    "name": "星光熠熠",
+    "keyword": "内幕平特"
+  },
+  "parser": {
+    "url_contains": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/557469.html",
+    "name": "星光熠熠",
+    "position": "top",
+    "keyword": "内幕平特",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}

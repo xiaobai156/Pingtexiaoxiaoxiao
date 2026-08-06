@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0152",
+  "rule_version": 1,
+  "target": {
+    "url": "https://zcphjs.ce83x-ms2rz-orwude.work:12277/#/users/2041",
+    "position": "top",
+    "name": "繁忙水壶",
+    "keyword": "平特⒈肖"
+  },
+  "parser": {
+    "url_contains": "https://zcphjs.ce83x-ms2rz-orwude.work:12277/#/users/2041",
+    "name": "繁忙水壶",
+    "position": "top",
+    "keyword": "平特⒈肖",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "dynamic_record",
+    "record_topic": "平特⒈肖"
+  },
+  "auxiliary": {}
+}

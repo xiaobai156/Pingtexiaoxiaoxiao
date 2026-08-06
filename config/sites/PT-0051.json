@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0051",
+  "rule_version": 1,
+  "target": {
+    "url": "https://gboqrz.hmf0d-gnako-vspyqi.work/topic/231872.html",
+    "position": "top",
+    "name": "万水千山",
+    "keyword": "平特玄机"
+  },
+  "parser": {
+    "url_contains": "https://gboqrz.hmf0d-gnako-vspyqi.work/topic/231872.html",
+    "name": "万水千山",
+    "position": "top",
+    "keyword": "平特玄机",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {}
+}
