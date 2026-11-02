@@ -13,7 +13,7 @@ from pingte.storage.evidence import EvidenceStore
 from pingte.storage.output import (
     atomic_write_text,
     build_output,
-    build_failure_output,
+    write_failure_output,
     date_label,
     default_output_paths,
 )
@@ -201,10 +201,8 @@ class SingleIssueRunner:
                     for item in successes
                 ),
             )
-            atomic_write_text(
-                failure_path,
-                build_failure_output(failures),
-            )
+            # 没有失败目录就不生成失败 TXT（并清掉遗留的旧文件）。
+            write_failure_output(failure_path, failures)
 
             if update_cache and not cache_blocked:
                 cache_update = self.cache_store.update(
@@ -225,10 +223,7 @@ class SingleIssueRunner:
                             normalized_issue,
                         )
                     )
-                    atomic_write_text(
-                        failure_path,
-                        build_failure_output(failures),
-                    )
+                    write_failure_output(failure_path, failures)
             elif update_cache and cache_blocked:
                 cache_update = CacheUpdateOutcome(
                     False,

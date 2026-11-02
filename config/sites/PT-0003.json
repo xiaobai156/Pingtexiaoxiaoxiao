@@ -17,9 +17,8 @@
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_header_section",
-    "source_strategy": "browser_main",
-    "frame_scope": "main",
-    "browser_selector": "body"
+    "source_strategy": "external_script",
+    "source_document_anchor": "【铜觔铁肋】（成语平特）"
   },
   "auxiliary": {}
 }

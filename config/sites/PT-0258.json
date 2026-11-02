@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0258",
+  "rule_version": 1,
+  "target": {
+    "url": "https://oifsonk.e0h72-f6bxs-juqrkd.xyz:16677/topic/450960.html",
+    "position": "top",
+    "name": "工地发红",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://oifsonk.e0h72-f6bxs-juqrkd.xyz:16677/topic/450960.html",
+    "name": "工地发红",
+    "position": "top",
+    "keyword": "成语平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://oifsonk.e0h72-f6bxs-juqrkd.xyz:16677/topic/450960.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "header_section",
+      "section_start": "工地发红",
+      "verified_issue": "229",
+      "direction_window": [
+        "229"
+      ],
+      "raw_lines": {
+        "229": "229期：<成语平特>【猪狗不如】开：？00准"
+      },
+      "history_issues": [
+        "229"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "recent_issue_range",
+      "authorization": "用户明确特例添加：抓到225、226、227、228、229任一期均算成功",
+      "allowed_issues": [
+        "225",
+        "226",
+        "227",
+        "228",
+        "229"
+      ]
+    }
+  }
+}

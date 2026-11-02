@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from pingte.application.runtime import build_runtime
+from pingte.fetch.http_fetcher import FetchSession
 
 
 def parse_issue(value: str) -> str:
@@ -47,6 +48,7 @@ def main(argv: list[str] | None = None) -> int:
     outcome = runner.run(
         issue,
         args.timeout,
+        session=FetchSession(),
         update_cache=not args.no_cache_update,
         audit=args.audit,
         success_path=success_path,

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0248",
+  "rule_version": 1,
+  "target": {
+    "url": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/15.html",
+    "position": "tail",
+    "name": "眉目传情",
+    "keyword": "平特一肖"
+  },
+  "parser": {
+    "url_contains": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/15.html",
+    "name": "眉目传情",
+    "position": "tail",
+    "keyword": "平特一肖",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/15.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "header_section",
+      "section_start": "平特一肖",
+      "section_end": "",
+      "verified_issue": "228",
+      "verified_value": "狗",
+      "direction_window": [
+        "227",
+        "228",
+        "229"
+      ],
+      "raw_lines": {
+        "228": "228 期：%平特一肖%【狗狗狗】开00错",
+        "227": "227 期：%平特一肖%【马马马】开13准",
+        "226": "226 期：%平特一肖%【虎虎虎】开17准",
+        "225": "225 期：%平特一肖%【鸡鸡鸡】开34准"
+      },
+      "history_issues": [
+        "229",
+        "228",
+        "227",
+        "226",
+        "225"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "history_shortage",
+      "authorization": "用户开始：按已确认11站特例添加"
+    }
+  }
+}

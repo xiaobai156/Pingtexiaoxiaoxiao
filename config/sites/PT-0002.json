@@ -14,6 +14,7 @@
     "position": "top",
     "keyword": "四字平特",
     "mode": "header_section",
+    "issue_occurrence": "first",
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_header_section",

@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from typing import Any
 
 from pingte.domain.models import TargetProfile
-
+from pingte.domain.zodiac import ZODIACS
 
 CONFIG_SCHEMA_VERSION = 1
 TARGET_ID_PATTERN = re.compile(r"PT-\d{4}")
@@ -21,6 +21,7 @@ DATA_STRUCTURE_BY_MODE = {
     "anchored_section": "confirmed_result_line",
     "anchored_formula_section": "terminal_formula_result",
     "author_section": "confirmed_result_line",
+    "row_section": "confirmed_result_row",
 }
 
 SECTION_BOUNDARY_BY_MODE = {
@@ -34,11 +35,13 @@ SECTION_BOUNDARY_BY_MODE = {
     "anchored_section": "explicit_anchors",
     "anchored_formula_section": "explicit_anchors",
     "author_section": "explicit_anchors",
+    "row_section": "explicit_anchors",
 }
 
 ALLOWED_SOURCE_STRATEGIES = {
     "browser_main",
     "dynamic_record",
+    "external_script",
     "image_resource",
     "linked_record",
     "http_main",
@@ -89,6 +92,7 @@ def _validate_rule(rule: dict[str, Any], label: str, errors: list[str]) -> None:
         "author_section",
         "ai_public_label",
         "followup_label",
+        "row_section",
     }:
         missing_anchors = [
             key
@@ -111,16 +115,102 @@ def _validate_rule(rule: dict[str, Any], label: str, errors: list[str]) -> None:
         != ("first" if rule.get("position") == "top" else "last")
     ):
         errors.append(f"{label} section_anchor_position 不能覆盖 target.position")
+    if "issue_occurrence" in rule:
+        occurrence = rule.get("issue_occurrence")
+        if occurrence not in {"first", "last"}:
+            errors.append(f"{label} issue_occurrence 必须是 first 或 last")
+        elif occurrence != (
+            "first" if rule.get("position") == "top" else "last"
+        ):
+            errors.append(f"{label} issue_occurrence 不能覆盖 target.position")
+    if "rejected_context_exempt" in rule:
+        tokens = rule.get("rejected_context_exempt")
+        if (
+            not isinstance(tokens, list)
+            or not tokens
+            or any(not _text(token) for token in tokens)
+        ):
+            errors.append(
+                f"{label} rejected_context_exempt 必须是非空字符串列表"
+            )
     if (
         "allow_many_zodiac_candidate" in rule
         and not isinstance(rule.get("allow_many_zodiac_candidate"), bool)
     ):
         errors.append(f"{label} allow_many_zodiac_candidate 必须是布尔值")
     if (
+        "stop_at_cycle_wrap" in rule
+        and not isinstance(rule.get("stop_at_cycle_wrap"), bool)
+    ):
+        errors.append(f"{label} stop_at_cycle_wrap 必须是布尔值")
+    if "stop_at_cycle_wrap" in rule and mode not in {
+        "header_section",
+        "named_section",
+    }:
+        errors.append(
+            f"{label} stop_at_cycle_wrap 只允许用于 header_section / named_section"
+        )
+    if (
+        "allow_short_pingte_result" in rule
+        and not isinstance(rule.get("allow_short_pingte_result"), bool)
+    ):
+        errors.append(f"{label} allow_short_pingte_result 必须是布尔值")
+    if "allow_short_pingte_result" in rule and mode != "header_section":
+        errors.append(
+            f"{label} allow_short_pingte_result 只允许用于 header_section"
+        )
+    # 「N期 平X」这类未开奖简写：仅当站点真实 DOM 证明「平」是「平特」简写时才可开启。
+    if (
+        "allow_bare_pingte_result" in rule
+        and not isinstance(rule.get("allow_bare_pingte_result"), bool)
+    ):
+        errors.append(f"{label} allow_bare_pingte_result 必须是布尔值")
+    if "allow_bare_pingte_result" in rule and mode not in {
+        "named_section",
+        "anchored_section",
+        "header_section",
+    }:
+        errors.append(
+            f"{label} allow_bare_pingte_result 只允许用于 "
+            "named_section / anchored_section / header_section"
+        )
+    if "phrase_zodiac_map" in rule:
+        phrase_map = rule.get("phrase_zodiac_map")
+        if (
+            not isinstance(phrase_map, dict)
+            or not phrase_map
+            or any(not _text(key) for key in phrase_map)
+            or any(_text(value) not in ZODIACS for value in phrase_map.values())
+        ):
+            errors.append(
+                f"{label} phrase_zodiac_map 必须是非空映射，键为非空字符串，"
+                f"值为单个生肖字"
+            )
+        elif mode != "header_section":
+            errors.append(
+                f"{label} phrase_zodiac_map 只允许用于 header_section"
+            )
+    if (
         "result_line_format" in rule
         and rule.get("result_line_format") not in {"compact_zodiac_suffix"}
     ):
         errors.append(f"{label} result_line_format 无效")
+    if (
+        "row_zodiac_source" in rule
+        and rule.get("row_zodiac_source") not in {"phrase_or_open"}
+    ):
+        errors.append(f"{label} row_zodiac_source 无效")
+    if "row_zodiac_source" in rule and mode != "row_section":
+        errors.append(f"{label} row_zodiac_source 只允许用于 row_section")
+    if "accepted_result_statuses" in rule:
+        statuses = rule.get("accepted_result_statuses")
+        allowed_statuses = {"准", "中", "√", "✓"}
+        if not isinstance(statuses, list) or not statuses or any(
+            _text(status) not in allowed_statuses for status in statuses
+        ):
+            errors.append(
+                f"{label} accepted_result_statuses 必须是准/中/√/✓的非空列表"
+            )
     if rule.get("result_line_format") == "compact_zodiac_suffix":
         if not _text(rule.get("result_suffix")):
             errors.append(f"{label} compact_zodiac_suffix 必须绑定 result_suffix")
@@ -139,6 +229,24 @@ def _validate_rule(rule: dict[str, Any], label: str, errors: list[str]) -> None:
         errors.append(f"{label} 权威来源策略无效：{source_strategy}")
     if source_strategy == "dynamic_record" and not _text(rule.get("record_topic")):
         errors.append(f"{label} 动态记录必须绑定 record_topic 栏目")
+    if source_strategy == "external_script" and not _text(
+        rule.get("source_document_anchor")
+    ):
+        errors.append(f"{label} 外部脚本来源必须绑定 source_document_anchor")
+    image_transport = _text(rule.get("image_transport"))
+    if image_transport and image_transport not in {"browser_dom", "referenced_script"}:
+        errors.append(f"{label} image_transport 无效：{image_transport}")
+    if image_transport and source_strategy != "image_resource":
+        errors.append(f"{label} image_transport 只允许用于 image_resource")
+    image_result_format = _text(rule.get("image_result_format"))
+    if image_result_format and image_result_format not in {"exact_summary"}:
+        errors.append(f"{label} image_result_format 无效：{image_result_format}")
+    if image_result_format and source_strategy != "image_resource":
+        errors.append(f"{label} image_result_format 只允许用于 image_resource")
+    if image_transport == "referenced_script" and image_result_format != "exact_summary":
+        errors.append(
+            f"{label} referenced_script 图片来源必须使用 exact_summary"
+        )
     if mode == "linked_topic" and source_strategy != "linked_record":
         errors.append(f"{label} linked_topic 必须使用 linked_record 来源")
     if source_strategy == "linked_record" and mode != "linked_topic":
@@ -337,16 +445,15 @@ def validate_compiled_config(config: object) -> dict[str, Any]:
             errors.append(
                 f"targets[{index}] 专属解析必须绑定完整URL/topic"
             )
-        if rule.get("source_strategy") == "image_resource":
-            if not any(
-                isinstance(item, dict)
-                and _text(item.get("url_contains")) == _text(target.get("url"))
-                and _text(item.get("name")) == _text(target.get("name"))
-                for item in image_rules
-            ):
-                errors.append(
-                    f"targets[{index}] image_resource 缺少对应图片来源绑定"
-                )
+        if rule.get("source_strategy") == "image_resource" and not any(
+            isinstance(item, dict)
+            and _text(item.get("url_contains")) == _text(target.get("url"))
+            and _text(item.get("name")) == _text(target.get("name"))
+            for item in image_rules
+        ):
+            errors.append(
+                f"targets[{index}] image_resource 缺少对应图片来源绑定"
+            )
 
     if target_ids != rule_ids:
         missing = sorted(target_ids - rule_ids)

@@ -28,7 +28,9 @@ def target_image_urls(
     for part in forum_parts[1:]:
         head = part.split('<div class="forum-body">', 1)[0]
         head_text = html_to_text(head)
-        if target.name not in head_text and target.keyword not in head_text:
+        if target.name not in head_text or (
+            target.keyword and target.keyword not in head_text
+        ):
             continue
         content_match = re.search(
             r'<div\b[^>]*class=["\'][^"\']*\bcontent\b[^"\']*["\'][^>]*>([\s\S]*?)</div>',
@@ -90,9 +92,11 @@ def special_image_issue_lines(
     session: object,
     *,
     image_targets: Mapping[str, str],
+    image_result_formats: Mapping[str, str],
     targets: Iterable[TargetProfile],
     fetch_bytes: Callable[[str, int, object], bytes],
     extract_zodiac: Callable[[bytes, str], str | None],
+    extract_summary_zodiac: Callable[[bytes, str], str | None],
 ) -> list[str]:
     if not issue:
         return []
@@ -110,11 +114,16 @@ def special_image_issue_lines(
     if target is None:
         return []
     lines: list[str] = []
+    extractor = (
+        extract_summary_zodiac
+        if image_result_formats.get(url) == "exact_summary"
+        else extract_zodiac
+    )
     for image_url in target_image_urls(page_html, target, issue):
         absolute_url = urljoin(url, image_url)
         try:
             raw = fetch_bytes(absolute_url, timeout, session)
-            zodiac = extract_zodiac(raw, issue)
+            zodiac = extractor(raw, issue)
         except Exception as exc:
             if diagnostics is not None:
                 diagnostics.append(

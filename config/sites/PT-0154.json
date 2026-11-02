@@ -18,7 +18,10 @@
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_header_section",
     "source_strategy": "dynamic_record",
-    "record_topic": "平特一肖"
+    "record_topic": "平特一肖",
+    "accepted_result_statuses": [
+      "准"
+    ]
   },
   "auxiliary": {}
 }

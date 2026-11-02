@@ -17,6 +17,7 @@
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_name_section",
+    "stop_at_cycle_wrap": true,
     "source_strategy": "browser_main",
     "frame_scope": "main",
     "browser_selector": "body"

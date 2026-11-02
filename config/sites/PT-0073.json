@@ -3,13 +3,13 @@
   "target_id": "PT-0073",
   "rule_version": 1,
   "target": {
-    "url": "https://kqfmnjht.ip6et-0zvu7-gpqkrf.work:16677/topic/496553.html",
+    "url": "https://qcmzobuw.1mppg-x8rsf-cxwlxc.cyou:17455/topic/496553.html",
     "position": "tail",
     "name": "求容取媚",
     "keyword": "成语平特"
   },
   "parser": {
-    "url_contains": "https://kqfmnjht.ip6et-0zvu7-gpqkrf.work:16677/topic/496553.html",
+    "url_contains": "https://qcmzobuw.1mppg-x8rsf-cxwlxc.cyou:17455/topic/496553.html",
     "name": "求容取媚",
     "position": "tail",
     "keyword": "成语平特",

@@ -15,6 +15,13 @@ def issue_pattern(issue: str) -> str:
     return rf"(?<!\d){re.escape(str(int(issue)))}(?!\d)\s*期"
 
 
+def issue_pattern_for_rule(issue: str, rule: Mapping[str, object]) -> str:
+    number = rf"(?<!\d){re.escape(str(int(issue)))}(?!\d)"
+    if rule.get("issue_line_format") == "arabic_colon_exact":
+        return number + r"\s*[:：]"
+    return number + r"\s*期"
+
+
 def issue_anchor_matches(line: str, template: str, issue: str) -> bool:
     """Match an issue-bearing section anchor without accepting a larger issue."""
     if not template:
@@ -25,6 +32,50 @@ def issue_anchor_matches(line: str, template: str, issue: str) -> bool:
     issue_number = rf"(?<!\d){re.escape(str(int(issue)))}(?!\d)"
     pattern = re.escape(before) + issue_number + re.escape(after)
     return bool(re.search(pattern, line))
+
+
+_PERIOD_TOKEN_RE = re.compile(r"(?<!\d)(\d{1,3})(?:\s*[-－~]\s*(\d{1,3}))?(?!\d)\s*期")
+_ZODIAC_CHARS = "鼠牛虎兔龙蛇马羊猴鸡狗猪"
+
+
+def value_line_belongs_to_issue(line: str, issue: str) -> bool:
+    """区块内的值行是否属于指定期。
+
+    区块里可能混入邻期数据行（例如 298 期区块里出现一行 ``297期 平特一肖 马``），
+    只按标签+生肖取值会把邻期的值当本期结果。判定方式是**值归属期**：
+    取「第一个生肖出现位置之前、最后一个期号标记」作为该值的期号。
+
+    这样两类借值都会被拒绝：
+      * ``297期 … 蛇 … 下期298期预告`` —— 蛇属于 297，请求 298 时拒绝；
+      * ``AAAAA级大公开298期 297期 平特一肖：鼠`` —— 鼠属于 297，请求 298 时拒绝。
+    行内没有期号时放行（专属解析器已把期号绑在区块锚点上）。
+    """
+    tokens: list[tuple[int, int, int]] = []
+    for match in _PERIOD_TOKEN_RE.finditer(line):
+        start = int(match.group(1))
+        end = int(match.group(2)) if match.group(2) else start
+        tokens.append((min(start, end), max(start, end), match.end()))
+    if not tokens:
+        return True
+
+    value_at = next(
+        (index for index, ch in enumerate(line) if ch in _ZODIAC_CHARS),
+        len(line),
+    )
+    owner: tuple[int, int] | None = None
+    for start, end, token_end in tokens:
+        if token_end <= value_at:
+            owner = (start, end)
+        else:
+            break
+    if owner is None:
+        # 期号都在生肖之后（例如「…【鼠】开 298期准」），按第一个期号归属。
+        owner = (tokens[0][0], tokens[0][1])
+    target = int(issue)
+    return owner[0] <= target <= owner[1]
+
+
+_value_line_belongs_to_issue = value_line_belongs_to_issue
 
 
 def clean_lines(text: str) -> list[str]:
@@ -38,7 +89,7 @@ def clean_lines(text: str) -> list[str]:
 @dataclass(frozen=True)
 class ParserHooks:
     extract_zodiac: Callable[[str], str | None]
-    extract_target_zodiac: Callable[[str, TargetProfile], str | None]
+    extract_target_zodiac: Callable[..., str | None]
     zodiac_chars: Callable[[str], str]
     dedupe_zodiac: Callable[[str], str]
 
@@ -124,8 +175,12 @@ def selected_section_starts(
 def has_confirmed_result_structure(
     line: str,
     issue: str | None = None,
+    *,
+    issue_marker: str | None = None,
+    allow_short_pingte: bool = False,
+    allow_bare_pingte: bool = False,
 ) -> bool:
-    if issue and not re.search(issue_pattern(issue), line):
+    if issue and not re.search(issue_marker or issue_pattern(issue), line):
         return False
     if any(
         token in line
@@ -149,6 +204,20 @@ def has_confirmed_result_structure(
     if re.search(rf"平[特一]{{1,3}}[\s:：]*[{ZODIACS}]+肖?[？?]?\s*$", line):
         return True
     if re.search(rf"平特[^期]{{0,10}}[{ZODIACS}]{{2,}}\s*$", line):
+        return True
+    # Site-specific abbreviation proven on the live page, e.g. "261期 平鸡肖".
+    # Only sites whose own DOM shows that spelling may enable it.
+    if allow_short_pingte and re.search(
+        rf"平\s*[{ZODIACS}]{{1,2}}\s*肖\s*$",
+        line,
+    ):
+        return True
+    # 本期未开奖的简写，例如「299期 平牛兔」：「平」是「平特」简写，后面直接
+    # 跟 1–2 个生肖、不带「肖」字。只有开启 allow_bare_pingte_result 的站点可用。
+    if allow_bare_pingte and re.search(
+        rf"期\s*平\s*[{ZODIACS}]{{1,2}}\s*$",
+        line,
+    ):
         return True
     return bool(
         re.search(rf"[{ZODIACS}]+肖[？?]?\s*$", line)

@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0251",
+  "rule_version": 1,
+  "target": {
+    "url": "https://oifsonk.e0h72-f6bxs-juqrkd.xyz:16677/topic/450940.html",
+    "position": "top",
+    "name": "浩浩荡荡",
+    "keyword": "二字平特"
+  },
+  "parser": {
+    "url_contains": "https://oifsonk.e0h72-f6bxs-juqrkd.xyz:16677/topic/450940.html",
+    "name": "浩浩荡荡",
+    "position": "top",
+    "keyword": "二字平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://oifsonk.e0h72-f6bxs-juqrkd.xyz:16677/topic/450940.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "header_section",
+      "section_start": "二字平特",
+      "section_end": "",
+      "verified_issue": "228",
+      "verified_value": "羊",
+      "direction_window": [
+        "229",
+        "228",
+        "227"
+      ],
+      "raw_lines": {
+        "228": "228期:二字解平【山羊】开:猴23错",
+        "227": "227期:二字解平【老鼠】开:鼠07.31中"
+      },
+      "history_issues": [
+        "229",
+        "228",
+        "227"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "history_shortage",
+      "authorization": "用户开始：按已确认11站特例添加"
+    }
+  }
+}

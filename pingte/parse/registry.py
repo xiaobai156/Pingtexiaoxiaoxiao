@@ -28,6 +28,7 @@ from .named_section import (
     named_section_issue_lines,
     special_followup_issue_lines,
 )
+from .row_section import row_section_issue_lines
 
 
 class DedicatedParserRegistry:
@@ -147,6 +148,15 @@ class DedicatedParserRegistry:
             )
         if mode == "author_section":
             return author_section_issue_lines(
+                text,
+                target,
+                normalized_issue,
+                self.rules,
+                self.hooks,
+                all_sections=all_blocks,
+            )
+        if mode == "row_section":
+            return row_section_issue_lines(
                 text,
                 target,
                 normalized_issue,

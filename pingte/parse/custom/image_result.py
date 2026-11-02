@@ -4,8 +4,8 @@ from io import BytesIO
 
 from pingte.domain.zodiac import ZODIACS
 
-
 IMAGE_TEMPLATE_CACHE: dict[tuple[str, str, int, tuple[int, int]], object] = {}
+PIL_TEMPLATE_CACHE: dict[tuple[str, str, int], object] = {}
 
 
 def decode_label_image(data: bytes) -> bytes | None:
@@ -100,7 +100,7 @@ def extract_red_issue_zodiac_from_encrypted_image(
         import cv2
         import numpy as np
         from PIL import Image, ImageDraw, ImageFont
-    except Exception:
+    except Exception:  # noqa: BLE001 - optional image dependencies
         return None
 
     image = Image.open(BytesIO(image_data)).convert("RGB")
@@ -236,7 +236,7 @@ def extract_historical_issue_zodiac_from_image(
         import cv2
         import numpy as np
         from PIL import Image, ImageDraw, ImageFont
-    except Exception:
+    except Exception:  # noqa: BLE001 - optional image dependencies
         return None
 
     image = Image.open(BytesIO(image_data)).convert("RGB")
@@ -303,9 +303,292 @@ def extract_issue_zodiac_from_label_image(
     issue: str,
 ) -> str | None:
     return (
-        extract_red_issue_zodiac_from_encrypted_image(data, issue)
+        extract_summary_issue_zodiac_from_image(data, issue)
+        or extract_red_issue_zodiac_from_encrypted_image(data, issue)
         or extract_historical_issue_zodiac_from_image(data, issue)
     )
+
+
+def _binary_bbox(mask, np):
+    coordinates = np.argwhere(mask)
+    if coordinates.size == 0:
+        return None
+    y0, x0 = coordinates.min(axis=0)
+    y1, x1 = coordinates.max(axis=0)
+    return mask[y0 : y1 + 1, x0 : x1 + 1]
+
+
+def _normalize_pil_mask(mask, np, Image, size: tuple[int, int] = (96, 96)):
+    cropped = _binary_bbox(mask, np)
+    if cropped is None:
+        return np.zeros(size, dtype="float32")
+    height, width = cropped.shape
+    scale = min((size[0] - 8) / height, (size[1] - 8) / width)
+    resampling = getattr(Image, "Resampling", Image).LANCZOS
+    resized = Image.fromarray(cropped.astype("uint8") * 255).resize(
+        (
+            max(1, round(width * scale)),
+            max(1, round(height * scale)),
+        ),
+        resampling,
+    )
+    array = np.asarray(resized, dtype="float32") / 255.0
+    normalized = np.zeros(size, dtype="float32")
+    y0 = (size[0] - array.shape[0]) // 2
+    x0 = (size[1] - array.shape[1]) // 2
+    normalized[
+        y0 : y0 + array.shape[0],
+        x0 : x0 + array.shape[1],
+    ] = array
+    return normalized
+
+
+def _render_pil_text_mask(text: str, font_path: str, font_size: int, Image, ImageDraw, ImageFont, np):
+    cache_key = (text, font_path, font_size)
+    cached = PIL_TEMPLATE_CACHE.get(cache_key)
+    if cached is not None:
+        return cached
+    font = ImageFont.truetype(font_path, font_size)
+    draw = ImageDraw.Draw(
+        Image.new("L", (max(240, font_size * 12), max(120, font_size * 4)), 0)
+    )
+    bbox = draw.textbbox((0, 0), text, font=font)
+    canvas = Image.new(
+        "L",
+        (
+            max(32, bbox[2] - bbox[0] + 16),
+            max(32, bbox[3] - bbox[1] + 16),
+        ),
+        0,
+    )
+    ImageDraw.Draw(canvas).text(
+        (8 - bbox[0], 8 - bbox[1]),
+        text,
+        font=font,
+        fill=255,
+    )
+    rendered = np.asarray(canvas) > 80
+    PIL_TEMPLATE_CACHE[cache_key] = rendered
+    return rendered
+
+
+def _pil_template_score(mask, text: str, np, Image, ImageDraw, ImageFont) -> float:
+    actual = _normalize_pil_mask(mask, np, Image)
+    best = 0.0
+    for font_path in font_paths():
+        try:
+            for font_size in range(22, 64, 2):
+                template = _normalize_pil_mask(
+                    _render_pil_text_mask(
+                        text,
+                        font_path,
+                        font_size,
+                        Image,
+                        ImageDraw,
+                        ImageFont,
+                        np,
+                    ),
+                    np,
+                    Image,
+                )
+                best = max(best, float(1.0 - np.mean(np.abs(actual - template))))
+        except OSError:
+            continue
+    return best
+
+
+def _pil_issue_prefix_matches(mask, issue: str, np, Image, ImageDraw, ImageFont) -> bool:
+    requested = int(issue)
+    digits = str(requested)
+    runs = _horizontal_runs(mask, np)
+    if len(runs) < len(digits) + 2:
+        return False
+    for expected, (x0, x1) in zip(digits, runs):
+        glyph = mask[:, x0 : x1 + 1]
+        scores = {
+            candidate: _pil_template_score(
+                glyph,
+                candidate,
+                np,
+                Image,
+                ImageDraw,
+                ImageFont,
+            )
+            for candidate in "0123456789"
+        }
+        ranked = sorted(scores.items(), key=lambda item: item[1], reverse=True)
+        if not ranked or ranked[0][0] != expected:
+            return False
+        second_score = ranked[1][1] if len(ranked) > 1 else 0.0
+        if ranked[0][1] < 0.80 or ranked[0][1] - second_score < 0.03:
+            return False
+    return True
+
+
+def _pil_compact_issue_prefix_matches(
+    mask,
+    issue: str,
+    np,
+    Image,
+    ImageDraw,
+    ImageFont,
+) -> bool:
+    requested = int(issue)
+    scores = {
+        candidate: _pil_template_score(
+            mask,
+            f"{candidate}期：",
+            np,
+            Image,
+            ImageDraw,
+            ImageFont,
+        )
+        for candidate in range(
+            max(1, requested - 10),
+            min(999, requested + 10) + 1,
+        )
+    }
+    ranked = sorted(scores.items(), key=lambda item: item[1], reverse=True)
+    return bool(
+        len(ranked) >= 2
+        and ranked[0][0] == requested
+        and ranked[0][1] >= 0.80
+        and ranked[0][1] - ranked[1][1] >= 0.003
+    )
+
+
+def _red_row_candidates(mask, np) -> list[tuple[int, int, int, int]]:
+    row_pixels = mask.sum(axis=1)
+    runs: list[tuple[int, int]] = []
+    start = None
+    for y, value in enumerate(row_pixels):
+        if value > 0 and start is None:
+            start = y
+        if (value == 0 or y == len(row_pixels) - 1) and start is not None:
+            end = y - 1 if value == 0 else y
+            if end - start + 1 >= 14:
+                runs.append((start, end))
+            start = None
+    candidates: list[tuple[int, int, int, int]] = []
+    for y0, y1 in runs:
+        column_pixels = mask[y0 : y1 + 1].sum(axis=0)
+        columns = np.flatnonzero(column_pixels > 0)
+        if columns.size == 0:
+            continue
+        x0, x1 = int(columns[0]), int(columns[-1])
+        if x1 - x0 + 1 >= 80:
+            candidates.append((x0, y0, x1, y1))
+    return sorted(candidates, key=lambda item: (item[3], item[2] - item[0]), reverse=True)
+
+
+def _horizontal_runs(mask, np) -> list[tuple[int, int]]:
+    columns = mask.sum(axis=0)
+    runs: list[tuple[int, int]] = []
+    start = None
+    for x, value in enumerate(columns):
+        if value > 0 and start is None:
+            start = x
+        if (value == 0 or x == len(columns) - 1) and start is not None:
+            end = x - 1 if value == 0 else x
+            if end - start + 1 >= 2:
+                runs.append((start, end))
+            start = None
+    merged: list[tuple[int, int]] = []
+    for start, end in runs:
+        if merged and start - merged[-1][1] <= 2:
+            merged[-1] = (merged[-1][0], end)
+        else:
+            merged.append((start, end))
+    return merged
+
+
+def extract_summary_issue_zodiac_from_image(data: bytes, issue: str) -> str | None:
+    """Read the red ``224期：生肖`` summary line used by the two image targets.
+
+    This is a deliberately bounded OCR fallback: it only accepts a red summary
+    line inside the target image, proves the rendered issue number with glyph
+    templates, and then recognizes the single trailing zodiac glyph. It never
+    scans unrelated page text or substitutes a neighboring issue.
+    """
+    image_data = decode_label_image(data)
+    if not image_data:
+        return None
+    try:
+        import numpy as np
+        from PIL import Image, ImageDraw, ImageFont
+    except Exception:  # noqa: BLE001 - image OCR is fail-closed
+        return None
+    try:
+        image = Image.open(BytesIO(image_data)).convert("RGB")
+        pixels = np.asarray(image)
+        red_mask = (
+            (pixels[:, :, 0] > 180)
+            & (pixels[:, :, 1] < 120)
+            & (pixels[:, :, 2] < 120)
+            & (pixels[:, :, 0] - pixels[:, :, 1] >= 80)
+            & (pixels[:, :, 0] - pixels[:, :, 2] >= 80)
+        )
+        for x0, y0, x1, y1 in _red_row_candidates(red_mask, np):
+            row = red_mask[y0 : y1 + 1, x0 : x1 + 1]
+            runs = _horizontal_runs(row, np)
+            if len(runs) < 2:
+                continue
+            zodiac_start = runs[-1][0]
+            prefix = row[:, :zodiac_start]
+            if not _pil_issue_prefix_matches(
+                prefix,
+                issue,
+                np,
+                Image,
+                ImageDraw,
+                ImageFont,
+            ):
+                colon_index = next(
+                    (
+                        index
+                        for index, (run_start, run_end) in enumerate(runs[:-1])
+                        if index >= len(str(int(issue)))
+                        and run_end - run_start + 1 <= 4
+                    ),
+                    None,
+                )
+                if colon_index is None:
+                    continue
+                prefix = row[:, : runs[colon_index][1] + 1]
+                if not _pil_compact_issue_prefix_matches(
+                    prefix,
+                    issue,
+                    np,
+                    Image,
+                    ImageDraw,
+                    ImageFont,
+                ):
+                    continue
+                zodiac_start = runs[colon_index + 1][0]
+            zodiac_mask = row[:, zodiac_start : runs[-1][1] + 1]
+            ranked = sorted(
+                (
+                    _pil_template_score(
+                        zodiac_mask,
+                        zodiac,
+                        np,
+                        Image,
+                        ImageDraw,
+                        ImageFont,
+                    ),
+                    zodiac,
+                )
+                for zodiac in ZODIACS
+            )
+            if not ranked:
+                continue
+            best_score, best_zodiac = ranked[-1]
+            second_score = ranked[-2][0] if len(ranked) > 1 else 0.0
+            if best_score >= 0.72 and best_score - second_score >= 0.02:
+                return best_zodiac
+    except Exception:  # noqa: BLE001 - image OCR is fail-closed
+        return None
+    return None
 
 
 def crop_mask(mask, boxes):

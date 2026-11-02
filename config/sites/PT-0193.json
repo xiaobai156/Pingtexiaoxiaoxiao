@@ -3,13 +3,13 @@
   "target_id": "PT-0193",
   "rule_version": 1,
   "target": {
-    "url": "https://ymqmvj.7md3q-rm157-wcvhte.work:16677/",
+    "url": "https://wxxmkabg.4yk78-3bq9s-xyqnwd.work:17477/",
     "position": "top",
     "name": "彩民书籍",
     "keyword": "平特一肖:"
   },
   "parser": {
-    "url_contains": "https://ymqmvj.7md3q-rm157-wcvhte.work:16677/",
+    "url_contains": "https://wxxmkabg.4yk78-3bq9s-xyqnwd.work:17477/",
     "name": "彩民书籍",
     "position": "top",
     "keyword": "平特一肖:",

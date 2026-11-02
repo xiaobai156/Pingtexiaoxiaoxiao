@@ -3,13 +3,13 @@
   "target_id": "PT-0046",
   "rule_version": 1,
   "target": {
-    "url": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/topic/652964.html",
+    "url": "https://amcypdyt.kmkc3-peu24-qngfdx.cyou:17477/topic/652964.html",
     "position": "top",
     "name": "花仙子",
     "keyword": "成语平特"
   },
   "parser": {
-    "url_contains": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/topic/652964.html",
+    "url_contains": "https://amcypdyt.kmkc3-peu24-qngfdx.cyou:17477/topic/652964.html",
     "name": "花仙子",
     "position": "top",
     "keyword": "成语平特",

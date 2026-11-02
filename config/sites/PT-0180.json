@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "target_id": "PT-0180",
-  "rule_version": 1,
+  "rule_version": 2,
   "target": {
     "url": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741281.html",
     "position": "tail",
@@ -17,6 +17,9 @@
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_name_section",
+    "result_line_format": "compact_zodiac_suffix",
+    "result_suffix": "肖",
+    "result_marker_required": false,
     "source_strategy": "browser_main",
     "frame_scope": "main",
     "browser_selector": "body"

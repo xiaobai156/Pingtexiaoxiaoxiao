@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0256",
+  "rule_version": 2,
+  "target": {
+    "url": "https://bb.48kk47.com:1888/",
+    "position": "top",
+    "name": "澳门资料库",
+    "keyword": "成语爆平特"
+  },
+  "parser": {
+    "url_contains": "https://bb.48kk47.com:1888/",
+    "name": "澳门资料库",
+    "position": "top",
+    "keyword": "成语爆平特",
+    "mode": "row_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_row",
+    "section_boundary": "explicit_anchors",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body",
+    "section_anchor": "澳门资料库 『成语平特』",
+    "section_end": "澳门资料库 『输尽光』",
+    "section_anchor_exact": true,
+    "section_end_exact": true,
+    "line_keyword": "成语爆平特",
+    "row_zodiac_source": "phrase_or_open"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://bb.48kk47.com:1888/",
+      "source_strategy": "browser_main",
+      "parser_mode": "row_section",
+      "section_start": "澳门资料库 『成语平特』",
+      "section_end": "澳门资料库 『输尽光』",
+      "verified_issue": "227",
+      "direction_window": [
+        "227",
+        "226",
+        "225"
+      ],
+      "raw_lines": {
+        "227": "227期 成语爆平特 【猴子捞月】 开 猴23 准",
+        "226": "226期 成语爆平特 【马到成功】 开 马01 准",
+        "225": "225期 成语爆平特 【胆小如鼠】 开 鼠07 准",
+        "224": "224期 成语爆平特 【九牛一毛】 开 牛18 准"
+      },
+      "history_issues": [
+        "227",
+        "226",
+        "225",
+        "224"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "history_shortage",
+      "authorization": "用户明确开始正式更新：澳门资料库按历史不足特例加入"
+    }
+  }
+}

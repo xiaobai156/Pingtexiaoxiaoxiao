@@ -1,13 +1,31 @@
 from __future__ import annotations
 
 import re
-from collections.abc import Mapping
+from collections.abc import Iterable, Mapping
 
 from pingte.domain.models import TargetProfile
 from pingte.domain.zodiac import ZODIAC_NUMBERS, ZODIACS
 
 
 ANY_ISSUE_PATTERN = r"(?<!\d)\d{1,3}(?!\d)\s*期"
+
+# 上期回顾类字样：这些词之后的生肖属于别的期，不能当本期结果。
+REVIEW_CONTEXT_TOKENS = (
+    "上期", "上期开", "回顾", "昨日", "昨天", "前期开", "往期",
+    "上期结果", "上期开奖", "上期准", "往期开",
+)
+
+
+def _strip_review_segments(line: str) -> str:
+    """去掉行内「上期/回顾/昨日…」开头的片段，防止取到别的期的值。
+
+    例：``298期 平特一肖 上期开马 本期待开`` → 只保留 ``298期 平特一肖 本期待开``。
+    """
+    if not any(token in line for token in REVIEW_CONTEXT_TOKENS):
+        return line
+    parts = re.split(r"[，,；;、\s]+", line)
+    kept = [part for part in parts if not any(t in part for t in REVIEW_CONTEXT_TOKENS)]
+    return " ".join(kept)
 
 
 def issue_pattern(issue: str) -> str:
@@ -48,15 +66,28 @@ def zodiac_from_open_numbers(line: str) -> str | None:
     return "".join(result) or None
 
 
-def _extract_zodiac(line: str, *, allow_open_number_zodiac: bool) -> str | None:
+def _extract_zodiac(
+    line: str,
+    *,
+    allow_open_number_zodiac: bool,
+    exempt_context_tokens: Iterable[str] = (),
+) -> str | None:
     clean_line = re.split(r"\s+(?:\.|function\b)", line, maxsplit=1)[0]
+    clean_line = _strip_review_segments(clean_line)
     rejected_context = (
         "目录标题", "帖子标题", "作者：", "作者:", "站长宣言", "站长提示", "本网站",
         "本站", "承诺", "拒绝", "严禁", "绝不", "免责声明", "温馨提示",
         "友情提示", "马后炮", "龙套数据", "虚假", "开后", "公告", "声明",
         "开奖结果", "非目标栏目",
     )
-    if any(token in clean_line for token in rejected_context):
+    exempt = {
+        str(token).strip() for token in exempt_context_tokens if str(token).strip()
+    }
+    if any(
+        token in clean_line
+        for token in rejected_context
+        if token not in exempt
+    ):
         return None
     if any(token in clean_line for token in ("→绝密数据", "→横扫庄家")):
         return None
@@ -101,9 +132,37 @@ def extract_zodiac(line: str) -> str | None:
     return _extract_zodiac(line, allow_open_number_zodiac=True)
 
 
-def strict_extract_zodiac(line: str) -> str | None:
+def strict_extract_zodiac(
+    line: str,
+    *,
+    exempt_context_tokens: Iterable[str] = (),
+) -> str | None:
     """Extract only zodiac characters explicitly present in the source line."""
-    return _extract_zodiac(line, allow_open_number_zodiac=False)
+    return _extract_zodiac(
+        line,
+        allow_open_number_zodiac=False,
+        exempt_context_tokens=exempt_context_tokens,
+    )
+
+
+def _mapped_zodiac(
+    line: str,
+    rule: Mapping[str, object] | None,
+) -> str | None:
+    """Resolve a configured phrase whose wording carries no zodiac character.
+
+    只在行内无字面生肖时才启用；命中多个互不相同的映射值时判为歧义并失败。
+    """
+    raw = (rule or {}).get("phrase_zodiac_map")
+    if not isinstance(raw, Mapping):
+        return None
+    matched = {
+        str(value).strip()
+        for phrase, value in raw.items()
+        if str(phrase).strip() and str(phrase).strip() in line
+    }
+    matched.discard("")
+    return matched.pop() if len(matched) == 1 else None
 
 
 def extract_target_zodiac(
@@ -119,4 +178,17 @@ def extract_target_zodiac(
     for identity in identities:
         if identity:
             sanitized = sanitized.replace(identity, "")
-    return strict_extract_zodiac(sanitized)
+    exemptions: tuple[str, ...] = ()
+    if isinstance(rule, Mapping):
+        raw = rule.get("rejected_context_exempt")
+        if isinstance(raw, (list, tuple)):
+            exemptions = tuple(
+                str(item) for item in raw if str(item).strip()
+            )
+    zodiac = strict_extract_zodiac(
+        sanitized,
+        exempt_context_tokens=exemptions,
+    )
+    if zodiac is None:
+        zodiac = _mapped_zodiac(sanitized, rule)
+    return zodiac

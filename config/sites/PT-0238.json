@@ -1,0 +1,71 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0238",
+  "rule_version": 1,
+  "target": {
+    "url": "https://6f4poq.ieeoz-patjy-nhcdpn.cyou/topic/462576.html",
+    "position": "top",
+    "name": "胡行乱为",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://6f4poq.ieeoz-patjy-nhcdpn.cyou/topic/462576.html",
+    "name": "胡行乱为",
+    "position": "top",
+    "keyword": "成语平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://6f4poq.ieeoz-patjy-nhcdpn.cyou/topic/462576.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "header_section",
+      "section_start": "成语平特",
+      "section_end": "",
+      "verified_issue": "228",
+      "verified_value": "龙虎",
+      "direction_window": [
+        "228",
+        "227",
+        "226"
+      ],
+      "raw_lines": {
+        "228": "228期：成语平特《龙腾虎跃》开：00准",
+        "227": "227期：成语平特《马马虎虎》开：29.13准",
+        "226": "226期：成语平特《猪怕牛壮》开：17错",
+        "225": "225期：成语平特《鸡飞蛋打》开：34.10准",
+        "224": "224期：成语平特《猴年马月》开：25.49准",
+        "223": "223期：成语平特《马马虎虎》开：01.29准",
+        "220": "220期：成语平特《龙马精神》开：27.39.25准",
+        "219": "219期：成语平特《猪狗不是》开：08准",
+        "218": "218期：成语平特《卧虎藏龙》开：17准",
+        "217": "217期：成语平特《九牛一毛》开：30.42准"
+      },
+      "history_issues": [
+        "228",
+        "227",
+        "226",
+        "225",
+        "224",
+        "223",
+        "222",
+        "221",
+        "220",
+        "219",
+        "218",
+        "217",
+        "216",
+        "215",
+        "214",
+        "213"
+      ],
+      "unexpected_issues": []
+    }
+  }
+}

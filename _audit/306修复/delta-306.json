@@ -1,0 +1,35 @@
+{
+  "schema": 1,
+  "issue": "306",
+  "created_at": "2026-11-02T19:08:48+08:00",
+  "results": [
+    {
+      "target_id": "PT-0189",
+      "name": "一视同仁",
+      "url": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741263.html",
+      "position": "top",
+      "keyword": "平特二肖",
+      "issue": "306",
+      "zodiac": "马龙",
+      "raw_line": "306期:平特二肖【马龙】开:00准",
+      "raw_order": "马龙",
+      "source": "browser-main",
+      "source_url": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741263.html",
+      "source_sha256": "9d321566e2a65cedf0373fdce6a90130673788ad68045a577d3c35388cd5865b",
+      "document_id": "",
+      "section_start": "",
+      "section_end": "",
+      "anchor_line": "一视同仁 发表于 08月02日 20:14:24",
+      "block_id": "browser-main:28:501",
+      "block_start": 28,
+      "block_end": 501,
+      "page_index": 29,
+      "block_index": 0,
+      "candidate_index": 29,
+      "parser_rule_id": "PT-0189",
+      "direction": "top",
+      "rule_version": 1,
+      "fetched_at": "2026-11-02T19:08:47+08:00"
+    }
+  ]
+}

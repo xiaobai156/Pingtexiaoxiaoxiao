@@ -14,6 +14,7 @@
     "position": "tail",
     "keyword": "两字平特",
     "mode": "header_section",
+    "section_name": "一马平川",
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_header_section",

@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0245",
+  "rule_version": 1,
+  "target": {
+    "url": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/04.html",
+    "position": "tail",
+    "name": "澳门赌神",
+    "keyword": "四字平特"
+  },
+  "parser": {
+    "url_contains": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/04.html",
+    "name": "澳门赌神",
+    "position": "tail",
+    "keyword": "四字平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "phrase_zodiac_map": {
+      "洋洋得意": "羊"
+    },
+    "browser_selector": "body"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/04.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "header_section",
+      "section_start": "四字平特",
+      "section_end": "",
+      "verified_issue": "228",
+      "verified_value": "蛇",
+      "direction_window": [
+        "226",
+        "227",
+        "228"
+      ],
+      "raw_lines": {
+        "228": "228 期:【四字平特】【引蛇出洞】开:38准",
+        "227": "227 期:【四字平特】【马踏飞燕】开:13准",
+        "226": "226 期:【四字平特】【狡兔三窟】开:04准"
+      },
+      "history_issues": [
+        "228",
+        "227",
+        "226"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "history_shortage",
+      "authorization": "用户开始：按已确认11站特例添加"
+    }
+  }
+}

@@ -19,7 +19,8 @@
     "section_boundary": "target_header_section",
     "source_strategy": "browser_main",
     "frame_scope": "main",
-    "browser_selector": "body"
+    "browser_selector": "body",
+    "section_end_text": "资料期期稳定"
   },
   "auxiliary": {}
 }

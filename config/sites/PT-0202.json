@@ -4,14 +4,14 @@
   "rule_version": 1,
   "target": {
     "url": "https://dahnqumi.i504e-bi3xk-bqxlqv.xyz:16677/topic/665091.html",
-    "position": "tail",
+    "position": "top",
     "name": "闻所未闻",
     "keyword": "平特二肖"
   },
   "parser": {
     "url_contains": "https://dahnqumi.i504e-bi3xk-bqxlqv.xyz:16677/topic/665091.html",
     "name": "闻所未闻",
-    "position": "tail",
+    "position": "top",
     "keyword": "平特二肖",
     "mode": "named_section",
     "issue_format": "arabic_issue_exact",

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "target_id": "PT-0091",
-  "rule_version": 1,
+  "rule_version": 2,
   "target": {
     "url": "https://rh2fgz.cxg5b-ueme6-sfoybf.work/topic/531085.html",
     "position": "tail",
@@ -17,6 +17,7 @@
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_header_section",
+    "issue_occurrence": "last",
     "source_strategy": "browser_main",
     "frame_scope": "main",
     "browser_selector": "body"

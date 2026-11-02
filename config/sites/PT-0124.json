@@ -3,13 +3,13 @@
   "target_id": "PT-0124",
   "rule_version": 1,
   "target": {
-    "url": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/454689.html",
+    "url": "https://zmcvybxv.3e3ux-nfe96-ktnvgy.cyou:17466/topic/454689.html",
     "position": "tail",
     "name": "纳新吐故",
     "keyword": "四字平特"
   },
   "parser": {
-    "url_contains": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/454689.html",
+    "url_contains": "https://zmcvybxv.3e3ux-nfe96-ktnvgy.cyou:17466/topic/454689.html",
     "name": "纳新吐故",
     "position": "tail",
     "keyword": "四字平特",

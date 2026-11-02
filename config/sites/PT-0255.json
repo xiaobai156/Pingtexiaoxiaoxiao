@@ -1,0 +1,62 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0255",
+  "rule_version": 1,
+  "target": {
+    "url": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/548991.html",
+    "position": "top",
+    "name": "忧心忡忡",
+    "keyword": "三字平特"
+  },
+  "parser": {
+    "url_contains": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/548991.html",
+    "name": "忧心忡忡",
+    "position": "top",
+    "keyword": "三字平特",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body",
+    "section_name": "忧心忡忡"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/548991.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "named_section",
+      "section_start": "忧心忡忡",
+      "section_end": "",
+      "verified_issue": "228",
+      "verified_value": "鼠",
+      "direction_window": [
+        "228",
+        "227",
+        "226"
+      ],
+      "raw_lines": {
+        "228": "228期三字平特《米老鼠》开00准",
+        "227": "227期三字平特《母老虎》开29准",
+        "226": "226期三字平特《铁公鸡》开17错",
+        "225": "225期三字平特《猪八戒》开01错",
+        "224": "224期三字平特《小绵羊》开36准",
+        "223": "223期三字平特《千里马》开01准"
+      },
+      "history_issues": [
+        "228",
+        "227",
+        "226",
+        "225",
+        "224",
+        "223",
+        "222",
+        "221"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "history_shortage",
+      "authorization": "用户开始：按已确认11站特例添加"
+    }
+  }
+}

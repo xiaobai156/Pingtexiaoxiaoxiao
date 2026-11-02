@@ -3,13 +3,13 @@
   "target_id": "PT-0192",
   "rule_version": 1,
   "target": {
-    "url": "https://3.www112291a.com:2053/gengxin/57.html",
+    "url": "https://otwuomdb.882244a.app:2026/gengxin/57.html",
     "position": "top",
     "name": "状元红",
     "keyword": "㊣平特一肖"
   },
   "parser": {
-    "url_contains": "https://3.www112291a.com:2053/gengxin/57.html",
+    "url_contains": "https://otwuomdb.882244a.app:2026/gengxin/57.html",
     "name": "状元红",
     "position": "top",
     "keyword": "㊣平特一肖",

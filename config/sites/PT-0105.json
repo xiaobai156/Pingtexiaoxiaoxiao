@@ -3,13 +3,13 @@
   "target_id": "PT-0105",
   "rule_version": 1,
   "target": {
-    "url": "https://kqfmnjht.ip6et-0zvu7-gpqkrf.work:16677/topic/488369.html",
+    "url": "https://qcmzobuw.1mppg-x8rsf-cxwlxc.cyou:17455/topic/488369.html",
     "position": "top",
     "name": "忍无可忍",
     "keyword": "四字平特"
   },
   "parser": {
-    "url_contains": "https://kqfmnjht.ip6et-0zvu7-gpqkrf.work:16677/topic/488369.html",
+    "url_contains": "https://qcmzobuw.1mppg-x8rsf-cxwlxc.cyou:17455/topic/488369.html",
     "name": "忍无可忍",
     "position": "top",
     "keyword": "四字平特",
@@ -17,6 +17,7 @@
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_header_section",
+    "issue_occurrence": "first",
     "source_strategy": "browser_main",
     "frame_scope": "main",
     "browser_selector": "body"

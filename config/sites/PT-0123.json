@@ -3,13 +3,13 @@
   "target_id": "PT-0123",
   "rule_version": 1,
   "target": {
-    "url": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/468862.html",
+    "url": "https://qcmzobuw.1mppg-x8rsf-cxwlxc.cyou:17455/topic/468862.html",
     "position": "tail",
     "name": "朝欢暮乐",
     "keyword": "平特一肖"
   },
   "parser": {
-    "url_contains": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/468862.html",
+    "url_contains": "https://qcmzobuw.1mppg-x8rsf-cxwlxc.cyou:17455/topic/468862.html",
     "name": "朝欢暮乐",
     "position": "tail",
     "keyword": "平特一肖",

@@ -17,7 +17,9 @@
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_header_section",
-    "source_strategy": "image_resource"
+    "source_strategy": "image_resource",
+    "image_transport": "referenced_script",
+    "image_result_format": "exact_summary"
   },
   "auxiliary": {
     "image_target": {

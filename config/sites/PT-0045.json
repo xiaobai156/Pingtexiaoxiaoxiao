@@ -3,13 +3,13 @@
   "target_id": "PT-0045",
   "rule_version": 1,
   "target": {
-    "url": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/topic/661874.html",
+    "url": "https://lthezdmp.ybavb-wmwp2-jibtap.work:17466/topic/661874.html",
     "position": "tail",
     "name": "精品好料",
     "keyword": "精品好料-平特一肖"
   },
   "parser": {
-    "url_contains": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/topic/661874.html",
+    "url_contains": "https://lthezdmp.ybavb-wmwp2-jibtap.work:17466/topic/661874.html",
     "name": "精品好料",
     "position": "tail",
     "keyword": "精品好料-平特一肖",

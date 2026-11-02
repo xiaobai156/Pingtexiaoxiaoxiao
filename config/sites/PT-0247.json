@@ -1,0 +1,75 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0247",
+  "rule_version": 1,
+  "target": {
+    "url": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/11.html",
+    "position": "tail",
+    "name": "澳门小生",
+    "keyword": "三字平特"
+  },
+  "parser": {
+    "url_contains": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/11.html",
+    "name": "澳门小生",
+    "position": "tail",
+    "keyword": "三字平特",
+    "mode": "header_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_header_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://552554.com.xn--61b2aeb.xn--h2brj9c:1888/sp/11.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "header_section",
+      "section_start": "三字平特",
+      "section_end": "",
+      "verified_issue": "228",
+      "verified_value": "狗",
+      "direction_window": [
+        "227",
+        "228",
+        "229"
+      ],
+      "raw_lines": {
+        "228": "228 期三字平特(哈巴狗)开:00错",
+        "227": "227 期三字平特(小白兔)开:16准",
+        "226": "226 期三字平特(眼镜蛇)开:38准",
+        "225": "225 期三字平特(铁公鸡)开:34准",
+        "224": "224 期三字平特(猪八戒)开:08准",
+        "223": "223 期三字平特(哈巴狗)开:21准",
+        "220": "220 期三字平特(小白兔)开:04准",
+        "219": "219 期三字平特(老山羊)开:00错",
+        "218": "218 期三字平特(铁公鸡)开:46准",
+        "217": "217 期三字平特(眼镜蛇)开:26准"
+      },
+      "history_issues": [
+        "229",
+        "228",
+        "227",
+        "226",
+        "225",
+        "224",
+        "223",
+        "222",
+        "221",
+        "220",
+        "219",
+        "218",
+        "217",
+        "216",
+        "215",
+        "214",
+        "213",
+        "212"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "suspected_duplicate",
+      "authorization": "用户开始：按已确认11站特例添加"
+    }
+  }
+}

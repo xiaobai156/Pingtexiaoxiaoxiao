@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0254",
+  "rule_version": 1,
+  "target": {
+    "url": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/548983.html",
+    "position": "tail",
+    "name": "星星点点",
+    "keyword": "三字平特"
+  },
+  "parser": {
+    "url_contains": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/548983.html",
+    "name": "星星点点",
+    "position": "tail",
+    "keyword": "三字平特",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body",
+    "section_name": "星星点点"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/548983.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "named_section",
+      "section_start": "星星点点",
+      "section_end": "",
+      "verified_issue": "228",
+      "verified_value": "鸡",
+      "direction_window": [
+        "226",
+        "227",
+        "228"
+      ],
+      "raw_lines": {
+        "228": "228期:【平特三字】『铁公鸡』开00准",
+        "227": "227期:【平特三字】『猪猪侠』开16错",
+        "226": "226期:【平特三字】『老黄狗』开33准",
+        "225": "225期:【平特三字】『牛魔王』开01错",
+        "224": "224期:【平特三字】『猪八戒』开08准",
+        "223": "223期:【平特三字】『米老鼠』开43准",
+        "220": "220期:【平特三字】『牛魔王』开48错",
+        "219": "219期:【平特三字】『铁公鸡』开22准",
+        "218": "218期:【平特三字】『母老虎』开17准",
+        "217": "217期:【平特三字】『米老鼠』开07准"
+      },
+      "history_issues": [
+        "228",
+        "227",
+        "226",
+        "225",
+        "224",
+        "223",
+        "222",
+        "221",
+        "220",
+        "219",
+        "218",
+        "217",
+        "216",
+        "215",
+        "214",
+        "213",
+        "212",
+        "211",
+        "210"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "suspected_duplicate",
+      "authorization": "用户开始：按已确认11站特例添加"
+    }
+  }
+}

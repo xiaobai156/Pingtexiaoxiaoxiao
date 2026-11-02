@@ -3,13 +3,12 @@ from __future__ import annotations
 import os
 import tempfile
 import time
+from collections.abc import Iterable
 from datetime import date
 from pathlib import Path
-from typing import Iterable
 
 from pingte.domain.failures import FailureCode, FailureDetail
 from pingte.domain.zodiac import ZODIACS
-
 
 _FAILURE_PRESENTATION: dict[FailureCode, tuple[str, str]] = {
     FailureCode.WEB_FETCH_FAILED: ("网页抓取", "网络失败"),
@@ -94,6 +93,64 @@ def build_output(results: Iterable[str]) -> str:
     return "\n".join(lines) + ("\n" if lines else "")
 
 
+def _success_record(line: str) -> tuple[str, str]:
+    parts = line.strip().split(maxsplit=1)
+    if len(parts) != 2:
+        raise ValueError(f"成功TXT行格式无效：{line}")
+    zodiac, name = parts
+    if (
+        not 1 <= len(zodiac) <= 2
+        or len(set(zodiac)) != len(zodiac)
+        or any(item not in ZODIACS for item in zodiac)
+    ):
+        raise ValueError(f"成功TXT生肖无效：{zodiac}")
+    return zodiac, name
+
+
+def merge_success_output(existing: str, additions: Iterable[str]) -> str:
+    """Preserve existing success records and append only new directories.
+
+    >>> old = build_output(["狗 原有"])
+    >>> merge_success_output(old, ["鸡 新增"]).splitlines()[:2]
+    ['狗 原有', '鸡 新增']
+    >>> merge_success_output(old, ["狗 原有"]) == old
+    True
+    >>> merge_success_output(old, ["鸡 原有"])
+    Traceback (most recent call last):
+    ...
+    ValueError: 成功TXT目录“原有”已有狗，禁止覆盖为鸡
+    """
+    record_text = existing.split("\n排行榜\n", 1)[0]
+    records = [line.strip() for line in record_text.splitlines() if line.strip()]
+    known: dict[str, str] = {}
+    for line in records:
+        zodiac, name = _success_record(line)
+        previous = known.get(name)
+        if previous is not None and previous != zodiac:
+            raise ValueError(
+                f"成功TXT目录“{name}”同时出现{previous}和{zodiac}"
+            )
+        known[name] = zodiac
+
+    changed = False
+    for line in additions:
+        normalized = line.strip()
+        if not normalized:
+            continue
+        zodiac, name = _success_record(normalized)
+        previous = known.get(name)
+        if previous is not None:
+            if previous != zodiac:
+                raise ValueError(
+                    f"成功TXT目录“{name}”已有{previous}，禁止覆盖为{zodiac}"
+                )
+            continue
+        records.append(normalized)
+        known[name] = zodiac
+        changed = True
+    return build_output(records) if changed else existing
+
+
 def date_label(today: date | None = None) -> str:
     current = today or date.today()
     return f"{current.month}.{current.day}"
@@ -130,6 +187,21 @@ def default_output_paths(
     )
 
 
+def write_failure_output(path: Path, failures: Iterable[FailureDetail]) -> None:
+    """写失败 TXT：没有失败就不生成文件，并清掉本期遗留的旧失败文件。
+
+    用户规则：单期抓取若没有失败目录，不生成失败 TXT。这里同时删除可能存在的
+    旧文件，避免上一轮遗留的清单被误当成当期失败。
+    """
+    path = Path(path)
+    items = list(failures)
+    if not items:
+        if path.exists():
+            path.unlink()
+        return
+    atomic_write_text(path, build_failure_output(items))
+
+
 def atomic_write_text(path: Path, content: str, encoding: str = "utf-8") -> None:
     path = Path(path)
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -152,3 +224,18 @@ def atomic_write_text(path: Path, content: str, encoding: str = "utf-8") -> None
         if temporary_path and temporary_path.exists():
             temporary_path.unlink()
         raise
+
+
+def atomic_append_success_output(
+    path: Path,
+    additions: Iterable[str],
+    encoding: str = "utf-8",
+) -> bool:
+    """Atomically add repair successes without replacing existing records."""
+    path = Path(path)
+    existing = path.read_text(encoding=encoding) if path.exists() else ""
+    merged = merge_success_output(existing, additions)
+    if merged == existing:
+        return False
+    atomic_write_text(path, merged, encoding)
+    return True

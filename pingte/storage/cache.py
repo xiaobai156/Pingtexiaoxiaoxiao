@@ -107,6 +107,93 @@ class CacheStore:
             with self._process_lock():
                 return self._update_locked(list(targets), by_key, normalized_issue)
 
+    def update_selected(
+        self,
+        results: Iterable[ValidatedResult],
+        issue: str,
+    ) -> CacheUpdateOutcome:
+        """Update only the validated target entries; leave all other sites intact."""
+        normalized_issue = str(int(issue))
+        by_key: dict[tuple[str, str, str, str], str] = {}
+        for item in results:
+            if item.issue != normalized_issue:
+                return CacheUpdateOutcome(False, "缓存候选包含与指定期数不一致的结果")
+            key = target_cache_key(item.target)
+            old = by_key.get(key)
+            if old and old != item.candidate.zodiac:
+                return CacheUpdateOutcome(False, "同一期同目录出现不同缓存候选")
+            by_key[key] = item.candidate.zodiac
+
+        with self._thread_lock:
+            with self._process_lock():
+                return self._update_selected_locked(by_key, normalized_issue)
+
+    def _update_selected_locked(
+        self,
+        values_by_key: dict[tuple[str, str, str, str], str],
+        issue: str,
+    ) -> CacheUpdateOutcome:
+        if not self.path.exists():
+            return CacheUpdateOutcome(False, "缓存文件不存在，原缓存已保留")
+        try:
+            payload = json.loads(self.path.read_text(encoding="utf-8-sig"))
+        except Exception as exc:
+            return CacheUpdateOutcome(
+                False,
+                f"recent_10_cache.json 读取失败，原缓存已保留：{type(exc).__name__}: {exc}",
+            )
+        if not isinstance(payload, dict) or not isinstance(payload.get("sites"), list):
+            return CacheUpdateOutcome(False, "recent_10_cache.json 格式无效，原缓存已保留")
+
+        matches = {key: 0 for key in values_by_key}
+        for entry in payload["sites"]:
+            if not isinstance(entry, dict):
+                continue
+            key = self._entry_key(entry)
+            if key not in values_by_key:
+                continue
+            matches[key] += 1
+            values = entry.get("values")
+            if not isinstance(values, dict):
+                return CacheUpdateOutcome(False, "目标站点缓存格式无效，原缓存已保留")
+            old_value = str(values.get(issue, "")).strip()
+            new_value = str(values_by_key[key]).strip()
+            if old_value and old_value != new_value:
+                return CacheUpdateOutcome(
+                    False,
+                    f"历史缓存同一期数据冲突：缓存{old_value}，当前{new_value}；历史解析错误或源站内容变更待确认",
+                )
+            values[issue] = new_value
+            entry["values"] = dict(
+                sorted(
+                    (
+                        (str(item_key), str(value))
+                        for item_key, value in values.items()
+                        if str(item_key).isdigit() and str(value).strip()
+                    ),
+                    key=lambda item: int(item[0]),
+                    reverse=True,
+                )[: self.window_size]
+            )
+
+        if any(count != 1 for count in matches.values()):
+            return CacheUpdateOutcome(False, "目标站点缓存目录不唯一或不存在，原缓存已保留")
+        issue_values = payload.get("issues", [])
+        if not isinstance(issue_values, list):
+            return CacheUpdateOutcome(False, "recent_10_cache.json 期数索引无效，原缓存已保留")
+        known_issues = {int(item) for item in issue_values if str(item).isdigit()}
+        known_issues.add(int(issue))
+        payload["issues"] = sorted(known_issues, reverse=True)[: self.window_size]
+        payload["updated_at"] = datetime.now().isoformat(timespec="seconds")
+        try:
+            self._atomic_json(payload)
+        except Exception as exc:
+            return CacheUpdateOutcome(
+                False,
+                f"recent_10_cache.json 更新失败，原缓存已保留：{type(exc).__name__}: {exc}",
+            )
+        return CacheUpdateOutcome(True)
+
     def update_values(
         self,
         targets: Iterable[Target],

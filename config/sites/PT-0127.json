@@ -3,13 +3,13 @@
   "target_id": "PT-0127",
   "rule_version": 1,
   "target": {
-    "url": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/250795.html",
+    "url": "https://zmcvybxv.3e3ux-nfe96-ktnvgy.cyou:17466/topic/250795.html",
     "position": "tail",
     "name": "痴痴傻傻",
     "keyword": "成语平特"
   },
   "parser": {
-    "url_contains": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/250795.html",
+    "url_contains": "https://zmcvybxv.3e3ux-nfe96-ktnvgy.cyou:17466/topic/250795.html",
     "name": "痴痴傻傻",
     "position": "tail",
     "keyword": "成语平特",

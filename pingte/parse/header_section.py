@@ -10,12 +10,46 @@ from .context import (
     RuleBook,
     clean_lines,
     has_confirmed_result_structure,
-    issue_anchor_matches,
     is_section_boundary,
+    issue_anchor_matches,
     issue_pattern,
+    issue_pattern_for_rule,
     many_zodiac_category,
     matches_keyword,
+    value_line_belongs_to_issue,
 )
+
+
+def accepted_result_status(line: str, rule: dict) -> bool:
+    statuses = rule.get("accepted_result_statuses")
+    if statuses is None:
+        return True
+    if not isinstance(statuses, (list, tuple)):
+        return False
+    normalized_line = line.rstrip()
+    return any(
+        str(status).strip() and normalized_line.endswith(str(status).strip())
+        for status in statuses
+    )
+
+
+def period_numbers(line: str) -> list[int]:
+    """Period-marked numbers on one line, for example 365 from ``365期...``."""
+    return [
+        int(match) for match in re.findall(r"(?<!\d)(\d{1,3})(?!\d)\s*期", line)
+    ]
+
+
+def cycle_wrap_detected(numbers: list[int], lowest_issue: int | None) -> bool:
+    """True when the column restarted after a lower period number was seen.
+
+    Sites that keep more than one full numbering cycle in one column list the
+    current cycle first (descending) and then continue with the previous cycle,
+    whose numbers jump back up. Only pages proven to have that wrap may enable
+    ``stop_at_cycle_wrap``; the wrapped list must never be treated as another
+    candidate for the same issue.
+    """
+    return bool(numbers) and lowest_issue is not None and min(numbers) > lowest_issue
 
 
 def target_identity_header_indexes(
@@ -49,9 +83,10 @@ def special_header_section_issue_lines(
     *,
     all_sections: bool = False,
 ) -> list[str]:
-    marker = issue_pattern(issue)
     rule = rules.rule_for(target)
+    marker = issue_pattern_for_rule(issue, rule)
     section_end_text = str(rule.get("section_end_text", ""))
+    allow_short_pingte = bool(rule.get("allow_short_pingte_result"))
     lines = clean_lines(text)
     if rule.get("source_strategy") == "dynamic_record":
         return [
@@ -59,7 +94,8 @@ def special_header_section_issue_lines(
             for line in lines
             if re.search(marker, line)
             and matches_keyword(line, target.keyword)
-            and has_confirmed_result_structure(line, issue)
+            and has_confirmed_result_structure(line, issue, issue_marker=marker)
+            and accepted_result_status(line, rule)
             and hooks.extract_target_zodiac(line, target)
         ]
     header_indexes = [
@@ -96,9 +132,21 @@ def special_header_section_issue_lines(
         )
         matches: list[str] = []
         seen_issue = False
+        stop_at_cycle_wrap = bool(rule.get("stop_at_cycle_wrap"))
+        lowest_issue: int | None = None
         for local_index, line in enumerate(lines[index:end]):
             if section_end_text and section_end_text in line and line != lines[index]:
                 break
+            if stop_at_cycle_wrap and local_index > 0:
+                numbers = period_numbers(line)
+                if cycle_wrap_detected(numbers, lowest_issue):
+                    break
+                if numbers:
+                    lowest_issue = (
+                        min(numbers)
+                        if lowest_issue is None
+                        else min(lowest_issue, *numbers)
+                    )
             if is_section_boundary(line, target, lines[index]) and not (
                 not seen_issue
                 and any(token in line for token in ("发表于", "作者：", "作者:"))
@@ -111,7 +159,16 @@ def special_header_section_issue_lines(
             if has_confirmed_result_structure(
                 line,
                 issue,
-            ) and hooks.extract_target_zodiac(line, target):
+                issue_marker=marker,
+                allow_short_pingte=allow_short_pingte,
+            ) and accepted_result_status(line, rule) and value_line_belongs_to_issue(
+                line,
+                issue,
+            ) and hooks.extract_target_zodiac(
+                line,
+                target,
+                rule,
+            ):
                 matches.append(line)
         if not all_sections:
             return matches
@@ -170,7 +227,6 @@ def special_ai_public_label_issue_lines(
     anchor_template = str(rule.get("section_anchor", ""))
     end_anchor = str(rule.get("section_end", ""))
     if anchor_template and end_anchor:
-        anchor = anchor_template.replace("{issue}", str(int(issue)))
         lines = clean_lines(text)
         starts = [
             index
@@ -201,6 +257,7 @@ def special_ai_public_label_issue_lines(
                 for line in lines[start + 1 : end]
                 if target.keyword in line
                 and hooks.extract_target_zodiac(line, target)
+                and value_line_belongs_to_issue(line, issue)
             )
         return list(dict.fromkeys(collected))
     marker = issue_pattern(issue)
@@ -219,7 +276,7 @@ def special_ai_public_label_issue_lines(
             if target.keyword in next_line and hooks.extract_target_zodiac(
                 next_line,
                 target,
-            ):
+            ) and value_line_belongs_to_issue(next_line, issue):
                 matches.append(f"{line} {next_line}")
     return list(dict.fromkeys(matches))
 

@@ -37,6 +37,7 @@ class FetchService:
         raw_fetch: RawFetch,
         bytes_fetch: BytesFetch,
         image_extract: ImageExtract,
+        image_summary_extract: ImageExtract,
     ) -> None:
         self.targets = tuple(targets)
         self.rules = tuple(rules)
@@ -44,6 +45,15 @@ class FetchService:
         self.raw_fetch = raw_fetch
         self.bytes_fetch = bytes_fetch
         self.image_extract = image_extract
+        self.image_summary_extract = image_summary_extract
+        self.image_result_formats = {
+            str(rule.get("url_contains", "")): str(
+                rule.get("image_result_format", "")
+            )
+            for rule in self.rules
+            if rule.get("source_strategy") == "image_resource"
+            and rule.get("image_result_format")
+        }
 
     def fetch_text(
         self,
@@ -82,6 +92,15 @@ class FetchService:
             (page_html, *(item[1] for item in script_documents))
         )
         expanded_html = expand_encoded_html(resource_html)
+        script_texts_by_url: dict[str, str] = {}
+        for script_url, script_html in script_documents:
+            script_text = "\n".join(
+                text
+                for chunk in decoded_html_chunks(script_html)
+                if (text := html_fragment_to_text(chunk))
+            )
+            if script_text:
+                script_texts_by_url[script_url] = script_text
         linked_mode = any(
             item.get("mode") == "linked_topic"
             and str(item.get("url_contains", "")) == url
@@ -115,9 +134,11 @@ class FetchService:
                 diagnostics,
                 session,
                 image_targets=self.image_targets,
+                image_result_formats=self.image_result_formats,
                 targets=self.targets,
                 fetch_bytes=self.bytes_fetch,
                 extract_zodiac=self.image_extract,
+                extract_summary_zodiac=self.image_summary_extract,
             )
         except Exception as exc:
             diagnostics.append(f"图片资源：{type(exc).__name__}: {exc}")
@@ -137,6 +158,12 @@ class FetchService:
             diagnostics.append(f"论坛接口：{type(exc).__name__}: {exc}")
             dynamic_text = ""
 
+        external_script_rules = [
+            rule
+            for rule in self.rules
+            if rule.get("source_strategy") == "external_script"
+            and str(rule.get("url_contains", "")) == url
+        ]
         documents: list[SourceDocument]
         if linked_mode:
             documents = deserialize_source_documents(linked_text)
@@ -164,6 +191,33 @@ class FetchService:
                     "\n".join(extra_lines),
                 )
             ]
+        elif external_script_rules:
+            documents = []
+            for rule in external_script_rules:
+                anchor = str(rule.get("source_document_anchor", "")).strip()
+                keyword = str(rule.get("keyword", "")).strip()
+                matches = [
+                    (script_url, script_text)
+                    for script_url, script_text in script_texts_by_url.items()
+                    if anchor in script_text
+                    and (not keyword or keyword in script_text)
+                ]
+                if len(matches) != 1:
+                    diagnostics.append(
+                        f"{rule.get('name', '')}：页面引用的目标外部脚本文档"
+                        f"数量为{len(matches)}，必须唯一"
+                    )
+                    continue
+                script_url, script_text = matches[0]
+                documents.append(
+                    make_source_document(
+                        "external-script",
+                        script_url,
+                        True,
+                        script_text,
+                        document_id=str(rule.get("target_id", "")),
+                    )
+                )
         else:
             documents = [
                 make_source_document(
@@ -182,16 +236,13 @@ class FetchService:
                 )
                 for index, chunk in enumerate(decoded_html_chunks(page_html))
             )
-            for script_url, script_html in script_documents:
-                documents.extend(
+            for script_url, script_text in script_texts_by_url.items():
+                documents.append(
                     make_source_document(
-                        f"external-script:{index}",
+                        "external-script",
                         script_url,
                         False,
-                        html_fragment_to_text(chunk),
-                    )
-                    for index, chunk in enumerate(
-                        decoded_html_chunks(script_html)
+                        script_text,
                     )
                 )
             if extra_lines:

@@ -1,0 +1,58 @@
+{
+  "schema_version": 1,
+  "target_id": "PT-0253",
+  "rule_version": 1,
+  "target": {
+    "url": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/649576.html",
+    "position": "top",
+    "name": "福气满门",
+    "keyword": "成语平特"
+  },
+  "parser": {
+    "url_contains": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/649576.html",
+    "name": "福气满门",
+    "position": "top",
+    "keyword": "成语平特",
+    "mode": "named_section",
+    "issue_format": "arabic_issue_exact",
+    "data_structure": "confirmed_result_line",
+    "section_boundary": "target_name_section",
+    "source_strategy": "browser_main",
+    "frame_scope": "main",
+    "browser_selector": "body",
+    "section_name": "福气满门"
+  },
+  "auxiliary": {
+    "onboarding": {
+      "source_url": "https://dukvjyhp.348fb-hdg3z-ipblfe.xyz:17466/topic/649576.html",
+      "source_strategy": "browser_main",
+      "parser_mode": "named_section",
+      "section_start": "福气满门",
+      "section_end": "",
+      "verified_issue": "228",
+      "verified_value": "鸡猴",
+      "direction_window": [
+        "228",
+        "227",
+        "226"
+      ],
+      "raw_lines": {
+        "228": "228期：【成语平特】≤杀鸡儆猴≥开:00准",
+        "227": "227期：【成语平特】≤羊狠狼贪≥开:24准",
+        "226": "226期：【成语平特】≤生龙活虎≥开:29.17准",
+        "225": "225期：【成语平特】≤龙腾虎跃≥开:27准",
+        "224": "224期：【成语平特】≤如狼牧羊≥开:36准"
+      },
+      "history_issues": [
+        "228",
+        "227",
+        "226",
+        "225",
+        "224"
+      ],
+      "unexpected_issues": [],
+      "special_approval": "history_shortage",
+      "authorization": "用户开始：按已确认11站特例添加"
+    }
+  }
+}

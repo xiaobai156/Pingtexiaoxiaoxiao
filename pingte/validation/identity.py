@@ -53,7 +53,7 @@ def target_requires_browser_dom(
         return False
     documents = deserialize_documents(text)
     if any(
-        document.source.startswith(("page-decoded:", "external-script:"))
+        document.source.startswith(("page-decoded:", "external-script"))
         for document in documents
     ):
         return True

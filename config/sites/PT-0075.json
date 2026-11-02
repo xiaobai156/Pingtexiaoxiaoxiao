@@ -3,15 +3,15 @@
   "target_id": "PT-0075",
   "rule_version": 1,
   "target": {
-    "url": "https://kqfmnjht.ip6et-0zvu7-gpqkrf.work:16677/topic/501158.html",
-    "position": "tail",
+    "url": "https://qzcilwbm.51jhh-hwqtp-txnodx.xyz:17477/topic/501158.html",
+    "position": "top",
     "name": "拾遗求利",
     "keyword": "平特一肖"
   },
   "parser": {
-    "url_contains": "https://kqfmnjht.ip6et-0zvu7-gpqkrf.work:16677/topic/501158.html",
+    "url_contains": "https://qzcilwbm.51jhh-hwqtp-txnodx.xyz:17477/topic/501158.html",
     "name": "拾遗求利",
-    "position": "tail",
+    "position": "top",
     "keyword": "平特一肖",
     "mode": "header_section",
     "issue_format": "arabic_issue_exact",

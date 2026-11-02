@@ -3,13 +3,13 @@
   "target_id": "PT-0021",
   "rule_version": 1,
   "target": {
-    "url": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/",
+    "url": "https://mwcyukkv.agx2u-9h1th-ycwtgx.cyou:17488/",
     "position": "top",
     "name": "智能平特",
     "keyword": "平特一肖"
   },
   "parser": {
-    "url_contains": "https://jjlachsn.4fk3e-i2rpf-vgknlh.work:16677/",
+    "url_contains": "https://mwcyukkv.agx2u-9h1th-ycwtgx.cyou:17488/",
     "name": "智能平特",
     "position": "top",
     "keyword": "平特一肖",

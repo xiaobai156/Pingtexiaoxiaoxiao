@@ -3,13 +3,13 @@
   "target_id": "PT-0128",
   "rule_version": 1,
   "target": {
-    "url": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/454717.html",
+    "url": "https://qcmzobuw.1mppg-x8rsf-cxwlxc.cyou:17455/topic/454717.html",
     "position": "tail",
     "name": "飞鸿冥冥",
     "keyword": "平特一肖"
   },
   "parser": {
-    "url_contains": "https://dhqjbz.uxec9-jxs3h-fomubo.work:16677/topic/454717.html",
+    "url_contains": "https://qcmzobuw.1mppg-x8rsf-cxwlxc.cyou:17455/topic/454717.html",
     "name": "飞鸿冥冥",
     "position": "tail",
     "keyword": "平特一肖",

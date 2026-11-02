@@ -1,8 +1,8 @@
 from __future__ import annotations
 
+from collections.abc import Callable, Iterable
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
-from typing import Callable, Iterable
 
 from pingte.domain.models import Target
 from pingte.fetch.documents import deserialize_source_documents
@@ -14,7 +14,6 @@ from pingte.validation.identity import (
     unique_urls,
 )
 from pingte.validation.result import ValidationOutcome, validate_documents
-
 
 FetchText = Callable[[str, int, str, object], str]
 FetchBrowserTexts = Callable[
@@ -94,8 +93,18 @@ class SitePipeline:
         browser_preferred = [
             target
             for target in self.targets
-            if rules.rule_for(target).get("source_strategy")
-            in {"browser_main", "image_resource"}
+            if (
+                rules.rule_for(target).get("source_strategy") == "browser_main"
+                or (
+                    rules.rule_for(target).get("source_strategy")
+                    == "image_resource"
+                    and rules.rule_for(target).get(
+                        "image_transport",
+                        "browser_dom",
+                    )
+                    == "browser_dom"
+                )
+            )
         ]
         browser_preferred_keys = {
             target_cache_key(target) for target in browser_preferred

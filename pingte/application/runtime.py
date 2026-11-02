@@ -1,15 +1,18 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Callable
 
 from pingte.config.loader import load_compiled_config, load_targets
 from pingte.domain.models import Target
 from pingte.fetch import browser_fetcher, http_fetcher
 from pingte.fetch.service import FetchService
 from pingte.parse.context import ParserHooks, RuleBook
-from pingte.parse.custom.image_result import extract_issue_zodiac_from_label_image
+from pingte.parse.custom.image_result import (
+    extract_issue_zodiac_from_label_image,
+    extract_summary_issue_zodiac_from_image,
+)
 from pingte.parse.registry import DedicatedParserRegistry
 from pingte.storage.cache import CacheStore
 from pingte.validation.issue import (
@@ -21,7 +24,6 @@ from pingte.validation.issue import (
 
 from .single_issue import SingleIssueRunner
 from .site_pipeline import SitePipeline
-
 
 DEFAULT_OUTPUT_DIR = Path(
     r"C:\Users\Administrator\Desktop\每天工具\爬虫合集\大围杀号生肖数据统一归纳"
@@ -105,6 +107,7 @@ def build_runtime(
         raw_fetch=raw_fetch,
         bytes_fetch=bytes_fetch,
         image_extract=extract_issue_zodiac_from_label_image,
+        image_summary_extract=extract_summary_issue_zodiac_from_image,
     )
 
     def fetch_text(url: str, timeout: int, issue: str, session: object) -> str:

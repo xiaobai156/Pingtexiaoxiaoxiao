@@ -4,17 +4,20 @@ import re
 
 from pingte.domain.models import TargetProfile
 
+from .anchored_section import compact_author_result_line
 from .context import (
     ANY_ISSUE_PATTERN,
     ParserHooks,
     RuleBook,
     clean_lines,
-    issue_anchor_matches,
     has_confirmed_result_structure,
     is_section_boundary,
+    issue_anchor_matches,
     issue_pattern,
     matches_keyword,
+    value_line_belongs_to_issue as _value_line_belongs_to_issue,
 )
+from .header_section import cycle_wrap_detected, period_numbers
 
 
 def named_section_issue_lines(
@@ -26,9 +29,8 @@ def named_section_issue_lines(
     *,
     all_sections: bool = False,
 ) -> list[str]:
-    section_name = str(
-        rules.rule_for(target).get("section_name", target.name)
-    ).strip()
+    rule = rules.rule_for(target)
+    section_name = str(rule.get("section_name", target.name)).strip()
     if not section_name:
         return []
     lines = clean_lines(text)
@@ -69,7 +71,19 @@ def named_section_issue_lines(
         )
         section = []
         seen_issue = False
+        stop_at_cycle_wrap = bool(rule.get("stop_at_cycle_wrap"))
+        lowest_issue: int | None = None
         for local_index, line in enumerate(lines[index:end]):
+            if stop_at_cycle_wrap and local_index > 0:
+                numbers = period_numbers(line)
+                if cycle_wrap_detected(numbers, lowest_issue):
+                    break
+                if numbers:
+                    lowest_issue = (
+                        min(numbers)
+                        if lowest_issue is None
+                        else min(lowest_issue, *numbers)
+                    )
             if is_section_boundary(line, target, lines[index]) and not (
                 not seen_issue
                 and any(
@@ -85,12 +99,16 @@ def named_section_issue_lines(
                 seen_issue = True
         header = " ".join(lines[max(0, index - 2) : index + 3])
         matches: list[str] = []
+        allow_bare = bool(rule.get("allow_bare_pingte_result"))
         for local_index, line in enumerate(section):
             if not re.search(marker, line):
                 continue
             zodiac = (
                 hooks.extract_target_zodiac(line, target)
-                if has_confirmed_result_structure(line, issue)
+                if has_confirmed_result_structure(
+                    line, issue, allow_bare_pingte=allow_bare
+                )
+                or compact_author_result_line(line, issue, rule)
                 else None
             )
             if zodiac:
@@ -104,7 +122,9 @@ def named_section_issue_lines(
                 if hooks.extract_target_zodiac(
                     segment,
                     target,
-                ) and re.search(r"[开開]", segment):
+                ) and has_confirmed_result_structure(
+                    segment, issue, allow_bare_pingte=allow_bare
+                ):
                     matches.append(segment)
                     break
         if target.keyword:
@@ -161,7 +181,6 @@ def special_followup_issue_lines(
     anchor_template = str(rule.get("section_anchor", ""))
     end_anchor = str(rule.get("section_end", ""))
     if anchor_template and end_anchor:
-        anchor = anchor_template.replace("{issue}", str(int(issue)))
         starts = [
             index
             for index, line in enumerate(lines)
@@ -193,6 +212,7 @@ def special_followup_issue_lines(
                 for line in lines[start + 1 : end]
                 if label in line
                 and hooks.extract_target_zodiac(line, target)
+                and _value_line_belongs_to_issue(line, issue)
             )
         return list(dict.fromkeys(collected))
     matches: list[str] = []
@@ -207,6 +227,6 @@ def special_followup_issue_lines(
             if label in next_line and hooks.extract_target_zodiac(
                 next_line,
                 target,
-            ):
+            ) and _value_line_belongs_to_issue(next_line, issue):
                 matches.append(next_line)
     return list(dict.fromkeys(matches))

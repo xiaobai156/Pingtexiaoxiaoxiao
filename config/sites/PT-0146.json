@@ -4,22 +4,20 @@
   "rule_version": 1,
   "target": {
     "url": "https://estsghu.t7gsm-xl1x8-uohlna.xyz:16677/topic/470171.html",
-    "position": "tail",
+    "position": "top",
     "name": "责备求全",
     "keyword": "成语平特"
   },
   "parser": {
     "url_contains": "https://estsghu.t7gsm-xl1x8-uohlna.xyz:16677/topic/470171.html",
     "name": "责备求全",
-    "position": "tail",
+    "position": "top",
     "keyword": "成语平特",
-    "mode": "anchored_section",
-    "section_anchor": "责备求全 发表于",
-    "section_end": "★★ 博彩必备★★",
-    "line_keyword": "成语平特",
+    "mode": "named_section",
+    "section_name": "责备求全 发表于",
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
-    "section_boundary": "explicit_anchors",
+    "section_boundary": "target_name_section",
     "source_strategy": "browser_main",
     "frame_scope": "main",
     "browser_selector": "body"
