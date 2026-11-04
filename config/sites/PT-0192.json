@@ -4,14 +4,14 @@
   "rule_version": 1,
   "target": {
     "url": "https://otwuomdb.882244a.app:2026/gengxin/57.html",
-    "position": "top",
+    "position": "tail",
     "name": "状元红",
     "keyword": "㊣平特一肖"
   },
   "parser": {
     "url_contains": "https://otwuomdb.882244a.app:2026/gengxin/57.html",
     "name": "状元红",
-    "position": "top",
+    "position": "tail",
     "keyword": "㊣平特一肖",
     "mode": "anchored_section",
     "section_anchor": "狀元紅⊙『平特一肖』",

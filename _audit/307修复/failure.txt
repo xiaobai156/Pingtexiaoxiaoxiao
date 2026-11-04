@@ -1,6 +1,0 @@
-失败 万水千山 https://gboqrz.hmf0d-gnako-vspyqi.work/topic/231872.html 方向: top 期数: 307
-阶段: 网页抓取 原因: 浏览器DOM抓取失败：Error: Page.goto: net::ERR_CONNECTION_CLOSED at https://gboqrz.hmf0d-gnako-vspyqi.work/topic/231872.html
-
-
-失败 尽兴生活 https://fbgbfg.www27521c.com:8443/gsb/am47.html 方向: bottom 期数: 307
-阶段: 结果校验 原因: 没有在指定期数、指定关键字/目录区域里解析到生肖
