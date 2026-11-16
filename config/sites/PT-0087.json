@@ -14,6 +14,7 @@
     "position": "top",
     "keyword": "三字平特",
     "mode": "header_section",
+    "rejected_context_exempt": ["马后炮"],
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",
     "section_boundary": "target_header_section",

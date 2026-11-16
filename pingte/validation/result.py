@@ -5,6 +5,7 @@ from dataclasses import dataclass
 
 from pingte.domain.failures import FailureCode, FailureDetail
 from pingte.domain.models import Candidate, SourceDocument, Target, ValidatedResult
+from pingte.domain.zodiac import MAX_RESULT_ZODIACS
 from pingte.fetch.documents import deserialize_source_documents
 from pingte.parse.context import (
     ANY_ISSUE_PATTERN,
@@ -616,10 +617,10 @@ def _finish(
 ) -> ValidationOutcome:
     candidate = candidates[0] if target.position == "top" else candidates[-1]
     zodiac = candidate.zodiac
-    if len(zodiac) > 2:
+    if len(zodiac) > MAX_RESULT_ZODIACS:
         return _failure(
             FailureCode.TOO_MANY_ZODIACS,
-            f"抓到的生肖超过2个，按规则丢失败，生肖：{zodiac}",
+            f"抓到的生肖超过{MAX_RESULT_ZODIACS}个，按规则丢失败，生肖：{zodiac}",
             target,
             issue,
             zodiac=zodiac,

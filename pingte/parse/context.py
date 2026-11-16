@@ -5,7 +5,7 @@ from collections.abc import Callable, Iterable, Mapping
 from dataclasses import dataclass
 
 from pingte.domain.models import TargetProfile
-from pingte.domain.zodiac import ZODIACS
+from pingte.domain.zodiac import MAX_RESULT_ZODIACS, ZODIACS
 
 
 ANY_ISSUE_PATTERN = r"(?<!\d)\d{1,3}(?!\d)\s*期"
@@ -208,14 +208,14 @@ def has_confirmed_result_structure(
     # Site-specific abbreviation proven on the live page, e.g. "261期 平鸡肖".
     # Only sites whose own DOM shows that spelling may enable it.
     if allow_short_pingte and re.search(
-        rf"平\s*[{ZODIACS}]{{1,2}}\s*肖\s*$",
+        rf"平\s*[{ZODIACS}]{{1,{MAX_RESULT_ZODIACS}}}\s*肖\s*$",
         line,
     ):
         return True
     # 本期未开奖的简写，例如「299期 平牛兔」：「平」是「平特」简写，后面直接
     # 跟 1–2 个生肖、不带「肖」字。只有开启 allow_bare_pingte_result 的站点可用。
     if allow_bare_pingte and re.search(
-        rf"期\s*平\s*[{ZODIACS}]{{1,2}}\s*$",
+        rf"期\s*平\s*[{ZODIACS}]{{1,{MAX_RESULT_ZODIACS}}}\s*$",
         line,
     ):
         return True

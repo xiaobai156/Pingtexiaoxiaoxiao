@@ -3,7 +3,7 @@ from __future__ import annotations
 import re
 
 from pingte.domain.models import TargetProfile
-from pingte.domain.zodiac import ZODIACS
+from pingte.domain.zodiac import MAX_RESULT_ZODIACS, ZODIACS
 
 from .context import (
     ParserHooks,
@@ -119,7 +119,8 @@ def compact_author_result_line(line: str, issue: str, rule: dict) -> bool:
     )
     return bool(
         re.fullmatch(
-            rf"{issue_pattern(issue)}\s*{re.escape(prefix)}[{ZODIACS}]{{1,2}}"
+            rf"{issue_pattern(issue)}\s*{re.escape(prefix)}"
+            f"[{ZODIACS}]{{1,{MAX_RESULT_ZODIACS}}}"
             rf"{re.escape(suffix)}\s*{marker}",
             line,
         )

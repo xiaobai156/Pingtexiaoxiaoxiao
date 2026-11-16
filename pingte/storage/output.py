@@ -8,7 +8,7 @@ from datetime import date
 from pathlib import Path
 
 from pingte.domain.failures import FailureCode, FailureDetail
-from pingte.domain.zodiac import ZODIACS
+from pingte.domain.zodiac import MAX_RESULT_ZODIACS, ZODIACS
 
 _FAILURE_PRESENTATION: dict[FailureCode, tuple[str, str]] = {
     FailureCode.WEB_FETCH_FAILED: ("网页抓取", "网络失败"),
@@ -99,7 +99,7 @@ def _success_record(line: str) -> tuple[str, str]:
         raise ValueError(f"成功TXT行格式无效：{line}")
     zodiac, name = parts
     if (
-        not 1 <= len(zodiac) <= 2
+        not 1 <= len(zodiac) <= MAX_RESULT_ZODIACS
         or len(set(zodiac)) != len(zodiac)
         or any(item not in ZODIACS for item in zodiac)
     ):

@@ -14,7 +14,7 @@ from typing import Any
 from pingte.config.compiler import _atomic_write_json, compile_site_configs
 from pingte.config.loader import load_compiled_config, load_site_configs
 from pingte.config.schema import SiteConfig
-from pingte.domain.zodiac import ZODIACS
+from pingte.domain.zodiac import MAX_RESULT_ZODIACS, ZODIACS
 from pingte.storage.cache import CacheStore
 from pingte.validation.identity import target_cache_key
 
@@ -77,7 +77,7 @@ def normalize_values(values: Mapping[str, str]) -> dict[str, str]:
         value = str(raw_value).strip()
         if not issue.isdigit() or not value:
             continue
-        if not 1 <= len(value) <= 2:
+        if not 1 <= len(value) <= MAX_RESULT_ZODIACS:
             raise OnboardingError(
                 f"期数 {issue} 的生肖数量不合法：{value}"
             )

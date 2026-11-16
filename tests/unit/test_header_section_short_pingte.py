@@ -122,8 +122,22 @@ def test_other_issue_line_is_not_accepted():
     assert _lines(_page("262期 平鸡肖"), "261", _rule()) == []
 
 
-def test_three_zodiac_short_form_is_rejected():
-    assert _lines(_page("261期 平鸡狗鼠肖"), "261", _rule()) == []
+def test_three_zodiac_short_form_is_accepted():
+    """用户 2026-11-13 定口径：单期结果上限由 2 肖放宽到 3 肖。"""
+    assert _lines(_page("261期 平鸡狗鼠肖"), "261", _rule()) == [
+        "261期 平鸡狗鼠肖"
+    ]
+
+
+def test_four_zodiac_short_form_is_accepted():
+    """用户 2026-11-15 定口径：单期结果上限由 3 肖放宽到 4 肖。"""
+    assert _lines(_page("261期 平鸡狗鼠牛肖"), "261", _rule()) == [
+        "261期 平鸡狗鼠牛肖"
+    ]
+
+
+def test_five_zodiac_short_form_is_still_rejected():
+    assert _lines(_page("261期 平鸡狗鼠牛虎肖"), "261", _rule()) == []
 
 
 def test_flag_does_not_loosen_shared_structure_by_default():

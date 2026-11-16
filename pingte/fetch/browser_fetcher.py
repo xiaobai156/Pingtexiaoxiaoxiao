@@ -94,6 +94,34 @@ async def navigate_browser_page_with_retry(
             await page.wait_for_timeout(250 * attempt)
 
 
+LAZY_CONTENT_STYLE = "*{content-visibility:visible!important}"
+
+
+async def reveal_lazy_content(page) -> bool:
+    """Force skipped-offscreen containers to render.
+
+    Pages that set ``content-visibility: auto`` keep offscreen blocks
+    unrendered, so ``inner_text`` returns them empty and the real result rows
+    look absent. Only the presentation hint is overridden; the document text
+    itself is untouched. Returns True when such containers were present.
+    """
+    try:
+        skipped = await page.evaluate(
+            "() => [...document.querySelectorAll('*')].filter("
+            "node => getComputedStyle(node).contentVisibility === 'auto').length"
+        )
+    except Exception:
+        return False
+    if not skipped:
+        return False
+    try:
+        await page.add_style_tag(content=LAZY_CONTENT_STYLE)
+        await page.wait_for_timeout(300)
+    except Exception:
+        return False
+    return True
+
+
 async def fetch_browser_main_text_with_retry(
     page,
     url: str,
@@ -124,6 +152,7 @@ async def fetch_browser_main_text_with_retry(
         await page.wait_for_timeout(min(1500, max(500, timeout * 100)))
         if not browser_url_matches(url, page.url):
             raise RuntimeError(f"浏览器最终URL不匹配：{page.url}")
+        await reveal_lazy_content(page)
         for body_attempt in range(1, body_poll_attempts + 1):
             body = await page.locator("body").inner_text(
                 timeout=max(1, timeout) * 1000

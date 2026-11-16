@@ -1,0 +1,91 @@
+<script type="text/javascript">document.addEventListener("DOMContentLoaded", function () {
+    let box = document.getElementById("domain");
+    if (box) {
+        // 確保頁面載入後立即觸發 scroll 事件，避免 iOS 第一次進入 top 失效
+        setTimeout(() => {
+
+            window.dispatchEvent(new Event("scroll"));
+        }, 50);
+    }
+});
+
+window.addEventListener("scroll", function () {
+    let box = document.getElementById("domain");
+    if (!box) return; // 防止元素未加載時報錯
+
+    let scrollY = window.scrollY || document.documentElement.scrollTop;
+
+    let screenWidth = window.innerWidth;
+
+    // 定義不同屏幕尺寸下的 top 值
+    let topValues = [
+        { maxWidth: 375, defaultTop: "192px", newTop: "130px" },
+        { maxWidth: 400, defaultTop: "190px", newTop: "28px" },
+        { maxWidth: 450, defaultTop: "210px", newTop: "148px" },
+        { maxWidth: 500, defaultTop: "230px", newTop: "168px" },
+        { maxWidth: 550, defaultTop: "255px", newTop: "193px" },
+        { maxWidth: 600, defaultTop: "270px", newTop: "208px" },
+
+        { maxWidth: 650, defaultTop: "300px", newTop: "238px" },
+        { maxWidth: 700, defaultTop: "304px", newTop: "242px" },
+        { maxWidth: 767, defaultTop: "332px", newTop: "270px" },
+        { maxWidth: 800, defaultTop: "362px", newTop: "300px" }
+    ];
+
+    // 設置默認的 top 值（最大尺寸）
+    let defaultTop = "362px";
+    let newTop = "300px";
+
+
+    for (let i = 0; i < topValues.length; i++) {
+        if (screenWidth <= topValues[i].maxWidth) {
+            defaultTop = topValues[i].defaultTop;
+            newTop = topValues[i].newTop;
+            break;
+        }
+    }
+
+    // 根據滾動位置調整 top
+    box.style.top = scrollY > 10 ? newTop : defaultTop;
+
+});
+
+// 監聽窗口大小變化，確保 top 值隨視窗變化而更新
+window.addEventListener("resize", function () {
+    window.dispatchEvent(new Event("scroll"));
+});
+
+window.addEventListener('scroll', function () {
+  var content = document.getElementById('theme_tab11-content');
+
+
+  if (window.scrollY > 400) { 
+    content.classList.add('show'); 
+  } else {
+    content.classList.remove('show');
+  }
+});</script>
+
+<style>.index_popup17,
+.index_popup17 * {
+  box-sizing: border-box;
+
+}
+.index_popup17 {
+  --ip17-main: #f4511e;
+  --ip17-main2: #ff8b1b;
+  --ip17-soft: #fff0d2;
+  --ip17-corner: #ffd8ad;
+  position: fixed;
+  inset: 0;
+  z-index: 2147483000;
+  display: none;
+
+  place-items: center;
+  padding: 18px;
+  font-family: "Microsoft YaHei", "PingFang SC", Arial, sans-serif;
+}
+.index_popup17_theme_purple {
+  --ip17-main: #5a28da;
+  --ip17-main2: #b743ff;
+  --ip17-so

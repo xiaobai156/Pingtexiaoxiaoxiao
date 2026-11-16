@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 
 from pingte.domain.models import TargetProfile
+from pingte.domain.zodiac import MAX_RESULT_ZODIACS, ZODIACS
 
 from .context import (
     ANY_ISSUE_PATTERN,
@@ -43,7 +44,7 @@ def _row_phrase_zodiac(row: str, hooks: ParserHooks) -> str | None:
     zodiac = hooks.dedupe_zodiac(
         hooks.zodiac_chars(" ".join(bracket_parts))
     )
-    return zodiac if 1 <= len(zodiac) <= 2 else None
+    return zodiac if 1 <= len(zodiac) <= MAX_RESULT_ZODIACS else None
 
 
 def row_section_issue_lines(
