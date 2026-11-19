@@ -1,0 +1,22 @@
+[
+ {
+  "name": "万水千山",
+  "url": "https://gboqrz.hmf0d-gnako-vspyqi.work/topic/231872.html",
+  "position": "top",
+  "issue": "322",
+  "stage": "网页抓取",
+  "reason": "浏览器DOM抓取失败：Error: Page.goto: net::ERR_SSL_PROTOCOL_ERROR at https://gboqrz.hmf0d-gnako-vspyqi.work/topic/231872.html",
+  "reached": false,
+  "error": "Error: Page.goto: net::ERR_SSL_PROTOCOL_ERROR at https://gboqrz.hmf0d-gnako-vspyqi.work/topic/231872.html\nCall log:\n  - navigating to \"https://gboqrz.hmf0d-gnako-vspyqi.work/topic/231872.html\", waiting until \"domcontentloaded\"\n"
+ },
+ {
+  "name": "大发慈悲",
+  "url": "https://gboqrz.hmf0d-gnako-vspyqi.work/topic/454146.html",
+  "position": "top",
+  "issue": "322",
+  "stage": "指定期数校验",
+  "reason": "指定期数不在top方向最近3组有效候选内；当前可见期数：321期、320期、319期",
+  "reached": false,
+  "error": "Error: Page.goto: net::ERR_SSL_PROTOCOL_ERROR at https://gboqrz.hmf0d-gnako-vspyqi.work/topic/454146.html\nCall log:\n  - navigating to \"https://gboqrz.hmf0d-gnako-vspyqi.work/topic/454146.html\", waiting until \"domcontentloaded\"\n"
+ }
+]
