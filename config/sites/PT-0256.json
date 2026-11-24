@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "target_id": "PT-0256",
-  "rule_version": 2,
+  "rule_version": 3,
   "target": {
     "url": "https://bb.48kk47.com:1888/",
     "position": "top",
@@ -25,7 +25,10 @@
     "section_anchor_exact": true,
     "section_end_exact": true,
     "line_keyword": "成语爆平特",
-    "row_zodiac_source": "phrase_or_open"
+    "row_zodiac_source": "phrase_or_open",
+    "phrase_zodiac_map": {
+      "洋洋得意": "羊"
+    }
   },
   "auxiliary": {
     "onboarding": {

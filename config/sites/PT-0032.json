@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "target_id": "PT-0032",
-  "rule_version": 1,
+  "rule_version": 2,
   "target": {
     "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702067.html",
     "position": "tail",
@@ -14,7 +14,7 @@
     "position": "tail",
     "keyword": "平特二肖",
     "mode": "anchored_section",
-    "section_anchor": "雄霸六合「平特二肖」独家提供",
+    "section_anchor": "「平特二肖」独家提供",
     "section_end": "★★ 博彩必备★★",
     "line_keyword": "平特二肖",
     "allow_many_zodiac_candidate": true,
@@ -23,7 +23,8 @@
     "section_boundary": "explicit_anchors",
     "source_strategy": "browser_main",
     "frame_scope": "main",
-    "browser_selector": "body"
+    "browser_selector": "body",
+    "section_name": "「平特二肖」独家提供"
   },
   "auxiliary": {}
 }

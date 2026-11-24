@@ -150,6 +150,16 @@ def _validate_rule(rule: dict[str, Any], label: str, errors: list[str]) -> None:
         errors.append(
             f"{label} stop_at_cycle_wrap 只允许用于 header_section / named_section"
         )
+    if "header_context_required" in rule:
+        context = rule.get("header_context_required")
+        if not isinstance(context, str) or not context.strip():
+            errors.append(
+                f"{label} header_context_required 必须是非空字符串"
+            )
+        elif mode != "header_section":
+            errors.append(
+                f"{label} header_context_required 只允许用于 header_section"
+            )
     if (
         "allow_short_pingte_result" in rule
         and not isinstance(rule.get("allow_short_pingte_result"), bool)
@@ -174,6 +184,15 @@ def _validate_rule(rule: dict[str, Any], label: str, errors: list[str]) -> None:
             f"{label} allow_bare_pingte_result 只允许用于 "
             "named_section / anchored_section / header_section"
         )
+    if (
+        "allow_pingte_tail_suffix" in rule
+        and not isinstance(rule.get("allow_pingte_tail_suffix"), bool)
+    ):
+        errors.append(f"{label} allow_pingte_tail_suffix 必须是布尔值")
+    if "allow_pingte_tail_suffix" in rule and mode != "named_section":
+        errors.append(
+            f"{label} allow_pingte_tail_suffix 只允许用于 named_section"
+        )
     if "phrase_zodiac_map" in rule:
         phrase_map = rule.get("phrase_zodiac_map")
         if (
@@ -186,9 +205,9 @@ def _validate_rule(rule: dict[str, Any], label: str, errors: list[str]) -> None:
                 f"{label} phrase_zodiac_map 必须是非空映射，键为非空字符串，"
                 f"值为单个生肖字"
             )
-        elif mode != "header_section":
+        elif mode not in {"header_section", "row_section"}:
             errors.append(
-                f"{label} phrase_zodiac_map 只允许用于 header_section"
+                f"{label} phrase_zodiac_map 只允许用于 header_section / row_section"
             )
     if (
         "result_line_format" in rule

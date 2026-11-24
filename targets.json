@@ -227,7 +227,7 @@
     },
     {
       "target_id": "PT-0030",
-      "rule_version": 1,
+      "rule_version": 3,
       "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702058.html",
       "position": "tail",
       "name": "凉风有信",
@@ -243,7 +243,7 @@
     },
     {
       "target_id": "PT-0032",
-      "rule_version": 1,
+      "rule_version": 2,
       "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702067.html",
       "position": "tail",
       "name": "雄霸六合",
@@ -283,7 +283,7 @@
     },
     {
       "target_id": "PT-0038",
-      "rule_version": 1,
+      "rule_version": 2,
       "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702063.html",
       "position": "top",
       "name": "一個好人",
@@ -307,7 +307,7 @@
     },
     {
       "target_id": "PT-0042",
-      "rule_version": 1,
+      "rule_version": 2,
       "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702064.html",
       "position": "tail",
       "name": "相思入骨",
@@ -1219,7 +1219,7 @@
     },
     {
       "target_id": "PT-0159",
-      "rule_version": 1,
+      "rule_version": 2,
       "url": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741286.html",
       "position": "tail",
       "name": "气冲牛斗",
@@ -1347,7 +1347,7 @@
     },
     {
       "target_id": "PT-0175",
-      "rule_version": 1,
+      "rule_version": 2,
       "url": "https://dwfoxsuz.ik1v5-stbjb-dsttyy.xyz:16677/",
       "position": "top",
       "name": "一点红",
@@ -1379,7 +1379,7 @@
     },
     {
       "target_id": "PT-0179",
-      "rule_version": 1,
+      "rule_version": 2,
       "url": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741288.html",
       "position": "tail",
       "name": "大公无私",
@@ -1995,7 +1995,7 @@
     },
     {
       "target_id": "PT-0256",
-      "rule_version": 2,
+      "rule_version": 3,
       "url": "https://bb.48kk47.com:1888/",
       "position": "top",
       "name": "澳门资料库",
@@ -2507,7 +2507,7 @@
     },
     {
       "target_id": "PT-0030",
-      "rule_version": 1,
+      "rule_version": 3,
       "url_contains": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702058.html",
       "name": "凉风有信",
       "position": "tail",
@@ -2518,7 +2518,9 @@
       "section_boundary": "target_header_section",
       "source_strategy": "browser_main",
       "frame_scope": "main",
-      "browser_selector": "body"
+      "browser_selector": "body",
+      "section_name": "「平特一肖」独家提供",
+      "header_context_required": "一肖平特"
     },
     {
       "target_id": "PT-0031",
@@ -2538,13 +2540,13 @@
     },
     {
       "target_id": "PT-0032",
-      "rule_version": 1,
+      "rule_version": 2,
       "url_contains": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702067.html",
       "name": "雄霸六合",
       "position": "tail",
       "keyword": "平特二肖",
       "mode": "anchored_section",
-      "section_anchor": "雄霸六合「平特二肖」独家提供",
+      "section_anchor": "「平特二肖」独家提供",
       "section_end": "★★ 博彩必备★★",
       "line_keyword": "平特二肖",
       "allow_many_zodiac_candidate": true,
@@ -2553,7 +2555,8 @@
       "section_boundary": "explicit_anchors",
       "source_strategy": "browser_main",
       "frame_scope": "main",
-      "browser_selector": "body"
+      "browser_selector": "body",
+      "section_name": "「平特二肖」独家提供"
     },
     {
       "target_id": "PT-0033",
@@ -2619,18 +2622,20 @@
     },
     {
       "target_id": "PT-0038",
-      "rule_version": 1,
+      "rule_version": 2,
       "url_contains": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702063.html",
       "name": "一個好人",
       "position": "top",
       "keyword": "平特一肖",
-      "mode": "named_section",
+      "mode": "header_section",
       "issue_format": "arabic_issue_exact",
       "data_structure": "confirmed_result_line",
-      "section_boundary": "target_name_section",
+      "section_boundary": "target_header_section",
       "source_strategy": "browser_main",
       "frame_scope": "main",
-      "browser_selector": "body"
+      "browser_selector": "body",
+      "section_name": "「平特一肖」独家提供",
+      "header_context_required": "平特一肖《"
     },
     {
       "target_id": "PT-0039",
@@ -2664,7 +2669,7 @@
     },
     {
       "target_id": "PT-0042",
-      "rule_version": 1,
+      "rule_version": 2,
       "url_contains": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702064.html",
       "name": "相思入骨",
       "position": "tail",
@@ -2675,7 +2680,8 @@
       "section_boundary": "target_name_section",
       "source_strategy": "browser_main",
       "frame_scope": "main",
-      "browser_selector": "body"
+      "browser_selector": "body",
+      "section_name": "「平特成语」独家提供"
     },
     {
       "target_id": "PT-0045",
@@ -4416,7 +4422,7 @@
     },
     {
       "target_id": "PT-0159",
-      "rule_version": 1,
+      "rule_version": 2,
       "url_contains": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741286.html",
       "name": "气冲牛斗",
       "position": "tail",
@@ -4427,7 +4433,8 @@
       "section_boundary": "target_name_section",
       "source_strategy": "browser_main",
       "frame_scope": "main",
-      "browser_selector": "body"
+      "browser_selector": "body",
+      "allow_pingte_tail_suffix": true
     },
     {
       "target_id": "PT-0160",
@@ -4669,7 +4676,7 @@
     },
     {
       "target_id": "PT-0175",
-      "rule_version": 1,
+      "rule_version": 2,
       "url_contains": "https://dwfoxsuz.ik1v5-stbjb-dsttyy.xyz:16677/",
       "name": "一点红",
       "position": "top",
@@ -4677,7 +4684,7 @@
       "mode": "anchored_section",
       "section_anchor": "澳门一点红【平特一肖】准准",
       "browser_required_anchor": "澳门一点红【平特一肖】准准",
-      "section_end": "买港澳六合彩就上76.cc 特码58倍",
+      "section_end": "买港澳六合彩就上",
       "line_keyword": "〖平特一肖〗",
       "issue_format": "arabic_issue_exact",
       "data_structure": "confirmed_result_line",
@@ -4738,7 +4745,7 @@
     },
     {
       "target_id": "PT-0179",
-      "rule_version": 1,
+      "rule_version": 2,
       "url_contains": "https://wmdhoki.6su07-7lpw6-gudkzl.xyz:16677/topic/741288.html",
       "name": "大公无私",
       "position": "tail",
@@ -4749,7 +4756,8 @@
       "section_boundary": "target_name_section",
       "source_strategy": "browser_main",
       "frame_scope": "main",
-      "browser_selector": "body"
+      "browser_selector": "body",
+      "allow_pingte_tail_suffix": true
     },
     {
       "target_id": "PT-0180",
@@ -6020,7 +6028,7 @@
     },
     {
       "target_id": "PT-0256",
-      "rule_version": 2,
+      "rule_version": 3,
       "url_contains": "https://bb.48kk47.com:1888/",
       "name": "澳门资料库",
       "position": "top",
@@ -6037,7 +6045,10 @@
       "section_anchor_exact": true,
       "section_end_exact": true,
       "line_keyword": "成语爆平特",
-      "row_zodiac_source": "phrase_or_open"
+      "row_zodiac_source": "phrase_or_open",
+      "phrase_zodiac_map": {
+        "洋洋得意": "羊"
+      }
     },
     {
       "target_id": "PT-0257",

@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "target_id": "PT-0030",
-  "rule_version": 1,
+  "rule_version": 3,
   "target": {
     "url": "https://cokvilbl.89qjb-6ptj9-aswmes.xyz:16677/topic/702058.html",
     "position": "tail",
@@ -19,7 +19,9 @@
     "section_boundary": "target_header_section",
     "source_strategy": "browser_main",
     "frame_scope": "main",
-    "browser_selector": "body"
+    "browser_selector": "body",
+    "section_name": "「平特一肖」独家提供",
+    "header_context_required": "一肖平特"
   },
   "auxiliary": {}
 }

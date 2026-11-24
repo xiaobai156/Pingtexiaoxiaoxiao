@@ -100,13 +100,17 @@ def named_section_issue_lines(
         header = " ".join(lines[max(0, index - 2) : index + 3])
         matches: list[str] = []
         allow_bare = bool(rule.get("allow_bare_pingte_result"))
+        allow_tail = bool(rule.get("allow_pingte_tail_suffix"))
         for local_index, line in enumerate(section):
             if not re.search(marker, line):
                 continue
             zodiac = (
                 hooks.extract_target_zodiac(line, target)
                 if has_confirmed_result_structure(
-                    line, issue, allow_bare_pingte=allow_bare
+                    line,
+                    issue,
+                    allow_bare_pingte=allow_bare,
+                    allow_pingte_tail_suffix=allow_tail,
                 )
                 or compact_author_result_line(line, issue, rule)
                 else None
@@ -123,7 +127,10 @@ def named_section_issue_lines(
                     segment,
                     target,
                 ) and has_confirmed_result_structure(
-                    segment, issue, allow_bare_pingte=allow_bare
+                    segment,
+                    issue,
+                    allow_bare_pingte=allow_bare,
+                    allow_pingte_tail_suffix=allow_tail,
                 ):
                     matches.append(segment)
                     break

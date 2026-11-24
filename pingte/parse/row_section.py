@@ -36,15 +36,33 @@ def _row_result_zodiac(row: str, hooks: ParserHooks) -> str | None:
     return zodiac if len(zodiac) == 1 else None
 
 
-def _row_phrase_zodiac(row: str, hooks: ParserHooks) -> str | None:
+def _row_phrase_zodiac(
+    row: str,
+    hooks: ParserHooks,
+    rule: dict | None = None,
+) -> str | None:
     parts = re.split(r"[开開]", row, maxsplit=1)
     if len(parts) != 2 or not re.search(RESULT_STATUS_PATTERN, parts[1]):
         return None
     bracket_parts = re.findall(r"[【『\[(（](.*?)[】』\])）]", parts[0])
-    zodiac = hooks.dedupe_zodiac(
-        hooks.zodiac_chars(" ".join(bracket_parts))
-    )
-    return zodiac if 1 <= len(zodiac) <= MAX_RESULT_ZODIACS else None
+    phrase_text = " ".join(bracket_parts)
+    zodiac = hooks.dedupe_zodiac(hooks.zodiac_chars(phrase_text))
+    if 1 <= len(zodiac) <= MAX_RESULT_ZODIACS:
+        return zodiac
+    # 谐音成语（如「洋洋得意」）字面不含生肖字：只允许配置里显式登记的
+    # phrase_zodiac_map 兜底，命中多个互不相同的映射值即判歧义失败。
+    mapping = (rule or {}).get("phrase_zodiac_map")
+    if isinstance(mapping, dict):
+        haystack = phrase_text or row
+        matched = {
+            str(value).strip()
+            for phrase, value in mapping.items()
+            if str(phrase).strip() and str(phrase).strip() in haystack
+        }
+        matched.discard("")
+        if len(matched) == 1:
+            return matched.pop()
+    return None
 
 
 def row_section_issue_lines(
@@ -136,7 +154,7 @@ def row_section_issue_lines(
                 continue
             opened = _row_result_zodiac(row, hooks)
             if rule.get("row_zodiac_source") == "phrase_or_open":
-                phrase = _row_phrase_zodiac(row, hooks)
+                phrase = _row_phrase_zodiac(row, hooks, rule)
                 if phrase and opened and phrase != opened:
                     matches.extend(
                         (row, f"{int(issue)}期 {line_keyword}【{opened}】开{opened}准")

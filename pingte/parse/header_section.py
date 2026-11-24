@@ -60,6 +60,11 @@ def target_identity_header_indexes(
 ) -> list[int]:
     rule = rules.rule_for(target)
     identities = {target.name, str(rule.get("section_name", "")).strip()}
+    # 站点用同一套模板给多个栏目/帖子生成表头时，广告列表里会出现与本栏目
+    # 完全相同的 section_name 行。header_context_required 要求该表头自己的
+    # 区块内必须出现这条上下文（例如本栏目数据行的固定写法），否则不算本目标
+    # 的身份表头 —— 只在站点显式配置时生效，默认行为不变。
+    context_required = str(rule.get("header_context_required", "")).strip()
     matches: list[int] = []
     for position, index in enumerate(header_indexes):
         start = max(0, index - 2)
@@ -69,8 +74,17 @@ def target_identity_header_indexes(
         if position + 1 < len(header_indexes):
             end = min(end, header_indexes[position + 1])
         window = " ".join(lines[start:end])
-        if any(identity and identity in window for identity in identities):
-            matches.append(index)
+        if not any(identity and identity in window for identity in identities):
+            continue
+        if context_required:
+            scope_end = (
+                header_indexes[position + 1]
+                if position + 1 < len(header_indexes)
+                else len(lines)
+            )
+            if not any(context_required in line for line in lines[index:scope_end]):
+                continue
+        matches.append(index)
     return matches
 
 

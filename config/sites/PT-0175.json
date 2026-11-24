@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "target_id": "PT-0175",
-  "rule_version": 1,
+  "rule_version": 2,
   "target": {
     "url": "https://dwfoxsuz.ik1v5-stbjb-dsttyy.xyz:16677/",
     "position": "top",
@@ -16,7 +16,7 @@
     "mode": "anchored_section",
     "section_anchor": "澳门一点红【平特一肖】准准",
     "browser_required_anchor": "澳门一点红【平特一肖】准准",
-    "section_end": "买港澳六合彩就上76.cc 特码58倍",
+    "section_end": "买港澳六合彩就上",
     "line_keyword": "〖平特一肖〗",
     "issue_format": "arabic_issue_exact",
     "data_structure": "confirmed_result_line",

@@ -179,6 +179,7 @@ def has_confirmed_result_structure(
     issue_marker: str | None = None,
     allow_short_pingte: bool = False,
     allow_bare_pingte: bool = False,
+    allow_pingte_tail_suffix: bool = False,
 ) -> bool:
     if issue and not re.search(issue_marker or issue_pattern(issue), line):
         return False
@@ -216,6 +217,14 @@ def has_confirmed_result_structure(
     # 跟 1–2 个生肖、不带「肖」字。只有开启 allow_bare_pingte_result 的站点可用。
     if allow_bare_pingte and re.search(
         rf"期\s*平\s*[{ZODIACS}]{{1,{MAX_RESULT_ZODIACS}}}\s*$",
+        line,
+    ):
+        return True
+    # 「326期平特 狗尾」：站点把生肖答案后面缀了一个模板噪声字「尾」
+    # （同一区块上一期那行 =狗√ 即下一期答案，可交叉验证）。只有真实页面
+    # 证明存在该变体的站点才可开启，避免把「平特尾」开奖号当成生肖。
+    if allow_pingte_tail_suffix and re.search(
+        rf"期\s*平特\s*[{ZODIACS}]{{1,{MAX_RESULT_ZODIACS}}}\s*尾\s*$",
         line,
     ):
         return True
